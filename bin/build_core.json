@@ -1,14 +1,24 @@
 {
     "files": [
+        "core/array.php",
+        "core/auth.php",
         "core/routing.php",
         "core/db.php",
+        "core/input.php",
         "core/view.php",
         "core/view_common.php",
+        
         "core/controllers/index.php",
+        "core/controllers/admin/index.php",
+        "core/controllers/admin/auth.php",
+        "core/controllers/admin/posts.php",
+        
         "core/models/posts.php",
         "core/basepath.php",
-        "core/bootstrap.php"
+        "core/bootstrap.php",
+        "themes/default/functions.php"
     ],
     
-    "destination": "build/index.php"
+    "destination": "build/index.php",
+    "compress": false
 }

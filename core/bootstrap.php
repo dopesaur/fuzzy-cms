@@ -7,11 +7,15 @@
 error_reporting(-1);
 ini_set('display_errors', 1);
 
-$route = isset($_GET['route']) ? $_GET['route'] : '';
+date_default_timezone_set('America/Los_Angeles');
+
+session_start();
+
+auth_user(
+    array_get($_SESSION, 'username'),
+    array_get($_SESSION, 'password')
+);
 
 db_connect(BASEPATH . '/content/db.sqlite');
 
-dispatch($route, array(
-    'index_index',
-    'post_view'
-));
+dispatch(array_get($_GET, 'route', ''));

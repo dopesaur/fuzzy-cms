@@ -1,17 +1,23 @@
-<h1>All posts</h1>
+<h2>All posts</h2>
 
-<p>Hello, there!</p>
-
-<ul>
+<?php if ($posts): ?> 
+<ul class="posts">
 <?php foreach ($posts as $post): ?> 
     <li>
-        <h2>
+        <h3>
             <a href="/post/view/<?php echo $post['id'] ?>">
                 <?php echo $post['title'] ?> 
             </a>
-        </h2>
+        </h3>
         
-        <?php echo $post['content'] ?>
+        <p class="date">
+            <?php echo format_date($post['date']) ?> 
+        </p>
+        
+        <?php echo $post['content'] ?> 
     </li>
-<?php endforeach; ?>
+<?php endforeach; ?> 
 </ul>
+<?php else: ?> 
+<p>No posts, m8.</p>
+<?php endif; ?> 

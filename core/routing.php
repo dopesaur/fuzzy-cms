@@ -6,9 +6,8 @@
  * {$prefix}_{$suffix} (...$parameters)
  * 
  * @param string $route
- * @param array $whitelist
  */
-function dispatch ($route, array $whitelist = array()) {
+function dispatch ($route) {
     $route = trim($route, '/');
     
     $segments = explode('/', $route);
@@ -19,18 +18,13 @@ function dispatch ($route, array $whitelist = array()) {
     $suffix = array_shift($segments);
     $suffix = $suffix ? $suffix : 'index';
     
-    $function = "{$prefix}_{$suffix}";
+    $function = "route_{$prefix}_{$suffix}";
+    $function = str_replace('-', '_', $function);
     $function = preg_replace('/[^\w\d_]/', '', $function);
     $function = trim($function, '_');
     
-    if (
-        !function_exists($function) ||
-        (
-            !empty($whitelist) &&
-            !in_array($function, $whitelist)
-        )
-    ) {
-        return false;
+    if (!function_exists($function)) {
+        not_found();
     }
     
     call_user_func_array($function, $segments);

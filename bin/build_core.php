@@ -1,27 +1,42 @@
 <?php
 
-$basepath = dirname(__DIR__) . '/';
-
-$build_config = file_get_contents(__DIR__ . '/build_core.json');
-$build_config = json_decode($build_config, true);
-
-$tags = array('<?php', '<?', '?>');
-
-$replace = array('', '', '');
-
-$content = '';
-$i = 0;
-
-foreach ($build_config['files'] as $file) {
-    $file_content = file_get_contents($basepath . $file);
+/**
+ * Remove PHP tags
+ * 
+ * @param string $text
+ * @return string
+ */
+function clean_tags ($text) {
+    static $tags = array('<?php', '<?', '?>');
+    static $replace = array('', '', '');
     
-    if ($i !== 0) {
-        $file_content = str_replace($tags, $replace, $file_content);
-    }
-    
-    $content .= $file_content;
-    
-    $i += 1;
+    return str_replace($tags, $replace, $text);
 }
 
-file_put_contents($basepath . $build_config['destination'], $content);
+/**
+ * Entry point, pass a config to build
+ * 
+ * @param string $json_config
+ */
+function main ($json_config) {
+    $basepath = dirname(__DIR__) . '/';
+    
+    $build_config = file_get_contents($json_config);
+    $build_config = json_decode($build_config, true);
+    
+    $files = $build_config['files'];
+    
+    $content = file_get_contents($basepath . array_shift($files));
+    
+    foreach ($files as $file) {
+        $file_content = file_get_contents($basepath . $file);
+        $file_content = clean_tags($file_content);
+    
+        $content .= $file_content;
+    }
+    
+    file_put_contents($basepath . $build_config['destination'], $content);
+}
+
+/** Build core */
+main(__DIR__ . '/build_core.json');

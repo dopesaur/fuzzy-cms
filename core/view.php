@@ -9,5 +9,5 @@
 function view ($__view, array $__data = array()) {
     extract($__data);
     
-    require sprintf('%s/themes/default/%s.php', BASEPATH, $__view);
+    require sprintf('%s/themes/%s/%s.php', BASEPATH, theme(), $__view);
 }

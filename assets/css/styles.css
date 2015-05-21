@@ -1,0 +1,95 @@
+/**
+ * Styles.css for default theme
+ * 
+ * 
+ */
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+    font-family: 'Open Sans';
+    font-weight: normal;
+    
+    margin-bottom: 0.5em;
+}
+
+h1 { font-size: 32px }
+h2 { font-size: 28px }
+h3 { font-size: 22px }
+h4 { font-size: 18px }
+h5 { font-size: 14px }
+h6 { font-size: 10px }
+
+p {
+    margin-bottom: 1em;
+}
+
+a {
+    color: #c36;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/**
+ * Common styles
+ */
+
+.wrapper {
+    margin: 0px auto;
+    width: 800px;
+}
+
+.wrapper-login {
+    width: 400px;
+}
+
+#wrapper ul {
+    list-style: none;
+}
+
+.posts > * {
+    margin-bottom: 2em;
+}
+
+/**
+ * Form stuff
+ */
+
+.form input,
+.form textarea {
+    border: 1px solid #ccc;
+    font-size: 12px;
+    
+    display: block;
+    margin-top: 4px;
+    padding: 4px;
+    width: 100%;
+}
+
+.form textarea {
+    height: 180px;
+    max-width: 100%; 
+}
+
+.form label {
+    font-size: 14px;
+    
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.form button {
+    padding: 4px 8px;
+}
