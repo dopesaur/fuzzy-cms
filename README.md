@@ -8,7 +8,7 @@ Current build version is in `build` folder, but if you need to make change in de
 
 Run: 
 
-```php
+```sh
 php bin/build_core.php
 ```
 
