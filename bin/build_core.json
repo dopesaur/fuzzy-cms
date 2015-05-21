@@ -1,0 +1,14 @@
+{
+    "files": [
+        "core/routing.php",
+        "core/db.php",
+        "core/view.php",
+        "core/view_common.php",
+        "core/controllers/index.php",
+        "core/models/posts.php",
+        "core/basepath.php",
+        "core/bootstrap.php"
+    ],
+    
+    "destination": "build/index.php"
+}
