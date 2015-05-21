@@ -99,7 +99,11 @@ function admin_posts_edit ($id, array $input) {
  * @param string $id
  */
 function route_admin_posts_remove ($id = 0) {
-    theme('admin');
+    if (!$id) {
+        not_found();
+    }
     
+    db_query('DELETE FROM posts WHERE id = ?', array($id));
     
+    redirect('admin/posts-view');
 }
