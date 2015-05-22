@@ -6,8 +6,8 @@
     </h1>
     
     <p>
-        <a href="/">Back to site</a> - 
-        <a href="/admin/posts-view/">Admin posts</a> -
+        <a href="/">Back to site</a> &mdash; 
+        <a href="/admin/posts-view/">Admin posts</a> &mdash;
         <a href="/admin/logout">Log out</a>
     </p>
 </header>

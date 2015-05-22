@@ -1,14 +1,12 @@
-<h2>All posts</h2>
-
 <?php if ($posts): ?> 
 <ul class="posts">
 <?php foreach ($posts as $post): ?> 
     <li>
-        <h3>
+        <h1 class="post-title">
             <a href="/post/view/<?php echo $post['id'] ?>">
                 <?php echo $post['title'] ?> 
             </a>
-        </h3>
+        </h1>
         
         <p class="date">
             <?php echo format_date($post['date']) ?> 

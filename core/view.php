@@ -1,6 +1,22 @@
 <?php
 
 /**
+ * Set or get theme
+ * 
+ * @param string $new_template
+ * @return string
+ */
+function theme ($new_template = '') {
+    static $template = 'default';
+    
+    if ($new_template) {
+        $template = $new_template;
+    }
+    
+    return $template;
+}
+
+/**
  * View the view
  * 
  * @param string $__view

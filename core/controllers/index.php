@@ -4,6 +4,8 @@
  * Index page
  */
 function route_index_index () {
+    theme('default');
+    
     layout('posts/index', array(
         'title' => 'All posts',
         'posts' => posts_all()
@@ -16,6 +18,8 @@ function route_index_index () {
  * @param string $post_id
  */
 function route_post_view ($post_id = 0) {
+    theme('default');
+    
     $post = post_by_id($post_id);
     
     if (empty($post)) {

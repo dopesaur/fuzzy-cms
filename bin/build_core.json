@@ -5,7 +5,7 @@
         "core/routing.php",
         "core/db.php",
         "core/input.php",
-        "core/view.php",
+        "core/view_compiled.php",
         "core/view_common.php",
         
         "core/controllers/index.php",
@@ -15,10 +15,9 @@
         
         "core/models/posts.php",
         "core/basepath.php",
-        "core/bootstrap.php",
-        "themes/default/functions.php"
+        "core/bootstrap.php"
     ],
     
     "destination": "build/index.php",
-    "compress": false
+    "compress": true
 }

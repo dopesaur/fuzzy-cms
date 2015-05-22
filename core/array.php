@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 /**
  * Get a key from array if is set

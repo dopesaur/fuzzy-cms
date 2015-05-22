@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Connect to database and/or get an instance
+ * Connect to database and or get an instance
  * 
  * @param string $path
  * @return \PDO

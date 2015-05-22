@@ -14,6 +14,22 @@ function clean_tags ($text) {
 }
 
 /**
+ * Compress php file
+ * 
+ * @param string $content
+ */
+function compress_file ($content) {
+    $comments = '/((?:#|\/\/)[^\n]*|\/\*[^\/]*\/)/';
+    $spaces = '/(\n|\s{4,}|\t)/';
+    
+    $content = preg_replace($comments, '', $content);
+    $content = preg_replace($spaces, '', $content);
+    $content = str_replace('<?php', '<?php ', $content);
+    
+    return $content;
+}
+
+/**
  * Entry point, pass a config to build
  * 
  * @param string $json_config
@@ -33,6 +49,10 @@ function main ($json_config) {
         $file_content = clean_tags($file_content);
     
         $content .= $file_content;
+    }
+    
+    if ($build_config['compress'] === true) {
+        $content = compress_file($content);
     }
     
     file_put_contents($basepath . $build_config['destination'], $content);

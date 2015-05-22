@@ -19,7 +19,9 @@
     </label>
     <?php endforeach; ?> 
     
-    <button>
-        Submit
-    </button>
+    <div class="group">
+        <button class="right" type="submit">
+            Submit
+        </button>
+    </div>
 </form>

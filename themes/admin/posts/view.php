@@ -1,23 +1,23 @@
-<h2>Posts</h2>
-
-<p>
-    <a href="/admin/posts-add/">
+<h2>
+    Posts
+    
+    <a class="small" href="/admin/posts-add/">
         Add a post
     </a>
-</p>
+</h2>
 
 <?php if ($posts): ?> 
 <ul class="posts">
     <?php foreach ($posts as $post): ?> 
     <li>
-        <h4>
+        <h3 class="post-title">
             <a href="/admin/posts-edit/<?php echo $post['id'] ?>">
                 <?php echo $post['title'] ?> 
-            </a> -
-            <a href="/admin/posts-remove/<?php echo $post['id'] ?>">
+            </a>
+            <a class="small" href="/admin/posts-remove/<?php echo $post['id'] ?>">
                 remove post
             </a>
-        </h4>
+        </h3>
         
         <p class="date">
             <?php echo $post['date'] ?> 
