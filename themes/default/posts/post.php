@@ -6,4 +6,4 @@
     <?php echo format_date($post['date']) ?> 
 </p>
 
-<?php echo $post['content'] ?> 
+<?php echo markdown($post['content']) ?> 

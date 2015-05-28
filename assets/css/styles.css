@@ -1,7 +1,8 @@
 /**
  * Styles.css for default theme
  * 
- * 
+ * @author dopesaur
+ * @package Fuzzy
  */
 
 * {
@@ -32,6 +33,13 @@ h6 { font-size: 10px }
 p {
     font-size: 14px;
     line-height: 140%;
+    
+    margin-bottom: 1em;
+}
+
+pre {
+    font-family: Menlo, Monaco, monospace;
+    line-height: 120%;
     
     margin-bottom: 1em;
 }
@@ -126,9 +134,44 @@ h6 .small {
     font-size: 14px;
     
     display: block;
-    margin-bottom: 0.5em;
+    margin-bottom: 2em;
 }
 
 .form button {
     padding: 4px 8px;
+}
+
+/**
+ * Header
+ */
+
+#wrapper {
+    margin-bottom: 24px;
+}
+
+#header h1 {
+    margin-bottom: 0.1em;
+}
+
+/**
+ * Pagination
+ */
+
+.pagination {
+    font-size: 0px;
+    
+    display: block;
+}
+
+.pagination > * {
+    font-size: 14px;
+    
+    display: inline-block;
+    margin-right: 1em;
+}
+
+.pagination a,
+.pagination span {
+    display: block;
+    padding: 2px 6px;
 }

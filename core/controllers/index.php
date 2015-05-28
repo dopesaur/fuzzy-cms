@@ -4,11 +4,25 @@
  * Index page
  */
 function route_index_index () {
+    route_posts_view();
+}
+
+/**
+ * Index page
+ */
+function route_posts_view ($page = 1) {
+    if (!$page) {
+        not_found();
+    }
+    
     theme('default');
     
+    $posts = posts_all_paginated(5, $page);
+    
     layout('posts/index', array(
-        'title' => 'All posts',
-        'posts' => posts_all()
+        'title'      => 'All posts',
+        'posts'      => $posts['posts'],
+        'pagination' => $posts['pagination']
     ));
 }
 

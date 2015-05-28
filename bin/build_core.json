@@ -7,6 +7,9 @@
         "core/input.php",
         "core/view_compiled.php",
         "core/view_common.php",
+        "core/pagination.php",
+        
+        "core/vendor/Parsedown.php",
         
         "core/controllers/index.php",
         "core/controllers/admin/index.php",

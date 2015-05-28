@@ -3,7 +3,8 @@
 /**
  * @const string BASEPATH Basepath
  */
-define('BASEPATH', chop(__DIR__, '/'));
+define('FUZZY_START', microtime(true));
+define('BASEPATH'   , chop(__DIR__, '/'));
 
 /** Core includes */
 require 'core/array.php';
@@ -13,6 +14,10 @@ require 'core/routing.php';
 require 'core/db.php';
 require 'core/auth.php';
 require 'core/input.php';
+require 'core/pagination.php';
+
+/* Outsiders */
+require 'core/vendor/Parsedown.php';
 
 /** Controllers includes */
 require 'core/controllers/index.php';
@@ -23,8 +28,8 @@ require 'core/controllers/admin/posts.php';
 /** Models includes */
 require 'core/models/posts.php';
 
-/** Theme functions includes, just for now */
-require 'themes/default/functions.php';
-
 /** Bootsrap, kick it */
 require 'core/bootstrap.php';
+
+// Show me the execution time
+printf('<!-- %.5f -->', microtime(true) - FUZZY_START);

@@ -23,7 +23,7 @@
             <?php echo $post['date'] ?> 
         </p>
         
-        <?php echo $post['content'] ?> 
+        <?php echo markdown($post['content']) ?> 
     </li>
     <?php endforeach; ?> 
 </ul>

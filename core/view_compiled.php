@@ -3,19 +3,19 @@
 /**
  * Set or get theme
  * 
- * @param string $new_template
+ * @param string $new_theme
  * @return string
  */
-function theme ($new_template = '') {
-    static $template = 'default';
+function theme ($new_theme = '') {
+    static $theme = 'default';
     
-    if ($new_template) {
-        $template = $new_template;
+    if ($new_theme) {
+        $theme = $new_theme;
         
-        require_once BASEPATH . '/themes/' . $template . '.php';
+        require_once sprintf('%s/themes/%s.php', BASEPATH, $theme);
     }
     
-    return $template;
+    return $theme;
 }
 
 /**
@@ -27,6 +27,8 @@ function view ($view, array $data = array()) {
     $view = str_replace('/', '_', $view);
     $view = preg_replace('/[^\w\d_]/', '', $view);
     
-    $function = "theme_{$view}";
+    $theme = theme();
+    
+    $function = "theme_{$theme}_{$view}";
     $function($data);
 }

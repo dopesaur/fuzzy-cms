@@ -1,4 +1,4 @@
-<?php function theme_auth (array $__data) { extract($__data); ?><!DOCTYPE html>
+<?php function theme_admin_auth (array $__data) {  extract($__data); ?><!DOCTYPE html>
 <html>
     <head>
         <?php view('blocks/head', $__data) ?> 
@@ -32,9 +32,9 @@
         </article>
     </body>
 </html>
-<?php }  function theme_index (array $__data) { extract($__data); ?><h1>Howdy, admin!</h1>
+<?php }  function theme_admin_index (array $__data) {  extract($__data); ?><h1>Howdy, admin!</h1>
 
-<p>This is an admin panel.</p><?php }  function theme_layout (array $__data) { extract($__data); ?><!DOCTYPE html>
+<p>This is an admin panel.</p><?php }  function theme_admin_layout (array $__data) {  extract($__data); ?><!DOCTYPE html>
 <html>
     <head>
         <?php view('blocks/head', $__data) ?> 
@@ -48,12 +48,12 @@
         </article>
     </body>
 </html>
-<?php }  function theme_blocks_head (array $__data) { extract($__data); ?><meta charset="UTF-8"/>
+<?php }  function theme_admin_blocks_head (array $__data) {  extract($__data); ?><meta charset="UTF-8"/>
 <title>
     <?php echo $title ?> - Default site
 </title>
 <link href="/assets/css/styles.css" rel="stylesheet" type="text/css"/>
-<?php }  function theme_blocks_header (array $__data) { extract($__data); ?><header class="wrapper" id="header">
+<?php }  function theme_admin_blocks_header (array $__data) {  extract($__data); ?><header class="wrapper" id="header">
     <h1>
         <a href="/admin/">
             Admin theme
@@ -66,7 +66,7 @@
         <a href="/admin/logout">Log out</a>
     </p>
 </header>
-<?php }  function theme_posts_modify (array $__data) { extract($__data); ?><h1><?php echo ucfirst($action) ?> a post</h1>
+<?php }  function theme_admin_posts_modify (array $__data) {  extract($__data); ?><h1><?php echo ucfirst($action) ?> a post</h1>
 
 <form class="form" method="post">
     <?php 
@@ -92,7 +92,7 @@
             Submit
         </button>
     </div>
-</form><?php }  function theme_posts_view (array $__data) { extract($__data); ?><h2>
+</form><?php }  function theme_admin_posts_view (array $__data) {  extract($__data); ?><h2>
     Posts
     
     <a class="small" href="/admin/posts-add/">
@@ -117,7 +117,7 @@
             <?php echo $post['date'] ?> 
         </p>
         
-        <?php echo $post['content'] ?> 
+        <?php echo markdown($post['content']) ?> 
     </li>
     <?php endforeach; ?> 
 </ul>

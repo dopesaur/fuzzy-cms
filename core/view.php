@@ -1,19 +1,34 @@
 <?php
 
 /**
- * Set or get theme
+ * Get path to theme view
  * 
- * @param string $new_template
+ * @param string $theme
+ * @param string $file
  * @return string
  */
-function theme ($new_template = '') {
-    static $template = 'default';
+function view_path ($theme, $file) {
+    return sprintf('%s/themes/%s/%s.php', BASEPATH, $theme, $file);
+}
+
+/**
+ * Set or get theme
+ * 
+ * @param string $new_theme
+ * @return string
+ */
+function theme ($new_theme = '') {
+    static $theme = 'default';
     
-    if ($new_template) {
-        $template = $new_template;
+    if ($new_theme) {
+        $theme = $new_theme;
     }
     
-    return $template;
+    if (file_exists($functions = view_path($theme, 'functions'))) {
+        require_once $functions;
+    }
+    
+    return $theme;
 }
 
 /**
@@ -25,5 +40,5 @@ function theme ($new_template = '') {
 function view ($__view, array $__data = array()) {
     extract($__data);
     
-    require sprintf('%s/themes/%s/%s.php', BASEPATH, theme(), $__view);
+    require view_path(theme(), $__view);
 }

@@ -21,23 +21,26 @@ function glob_recursive ($pattern, $flags = 0) {
 }
 
 /**
- * 
+ * Wrap theme view into function
  * 
  * @param string $name
  * @param string $content
+ * @param string $theme
  */
-function wrap_in_function ($name, $content) {
+function wrap_in_function ($name, $content, $theme) {
     $name = substr($name, 0, strrpos($name, '.'));
     $name = str_replace('/', '_', $name);
     
-    $function = '<?php function theme_%s (array $__data) { extract($__data); ?>%s<?php } ?>';
+    $function = '<?php function theme_%s_%s (array $__data) { ' .
+                ' extract($__data); ?>%s<?php } ?>';
     
-    return sprintf($function, $name, $content);
+    return sprintf($function, $theme, $name, $content);
 }
 
 /**
  * Entry point
  * 
+ * @todo decompose this function
  * @param string $theme
  */
 function main ($theme = 'default') {
@@ -61,7 +64,7 @@ function main ($theme = 'default') {
             $content = "{$file_content}?>{$content}";
         }
         else {
-            $content .= wrap_in_function($filename, $file_content);
+            $content .= wrap_in_function($filename, $file_content, $theme);
         }
     }
     

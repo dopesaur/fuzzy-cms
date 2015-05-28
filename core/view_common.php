@@ -31,3 +31,17 @@ function redirect ($path) {
     
     header("Location: /$path") and exit;
 }
+
+/**
+ * Process markdown via Parsedown
+ * 
+ * @param string $markdown
+ */
+function markdown ($markdown) {
+    static $parse = null;
+    
+    // My® signature© move™
+    $parse or $parse = new Parsedown;
+    
+    return $parse->text($markdown);
+}
