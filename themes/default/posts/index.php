@@ -3,7 +3,7 @@
 <?php foreach ($posts as $post): ?> 
     <li>
         <h1 class="post-title">
-            <a href="/post/view/<?php echo $post['id'] ?>">
+            <a href="<?php echo url('post', 'view', $post['id']) ?>">
                 <?php echo $post['title'] ?> 
             </a>
         </h1>

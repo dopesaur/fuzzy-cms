@@ -14,7 +14,8 @@
             </p>
             <?php endif; ?>
         
-            <form action="/admin/login-post/" class="form" method="post">
+            <form action="<?php echo url('admin', 'login-post') ?>" 
+                  class="form" method="post">
                 <label>
                     Username: 
                     <input name="username" type="text"/>
@@ -52,18 +53,20 @@
 <title>
     <?php echo $title ?> - Default site
 </title>
-<link href="/assets/css/styles.css" rel="stylesheet" type="text/css"/>
+<link href="<?php echo url('assets/css/styles.css') ?>" 
+      rel="stylesheet" 
+      type="text/css"/>
 <?php }  function theme_admin_blocks_header (array $__data) {  extract($__data); ?><header class="wrapper" id="header">
     <h1>
-        <a href="/admin/">
+        <a href="<?php echo url('admin') ?>">
             Admin theme
         </a>
     </h1>
     
     <p>
-        <a href="/">Back to site</a> &mdash; 
-        <a href="/admin/posts-view/">Admin posts</a> &mdash;
-        <a href="/admin/logout">Log out</a>
+        <a href="<?php echo url() ?>">Back to site</a> &mdash; 
+        <a href="<?php echo url('admin', 'posts-view') ?>">Admin posts</a> &mdash;
+        <a href="<?php echo url('admin', 'logout') ?>">Log out</a>
     </p>
 </header>
 <?php }  function theme_admin_posts_modify (array $__data) {  extract($__data); ?><h1><?php echo ucfirst($action) ?> a post</h1>
@@ -95,7 +98,7 @@
 </form><?php }  function theme_admin_posts_view (array $__data) {  extract($__data); ?><h2>
     Posts
     
-    <a class="small" href="/admin/posts-add/">
+    <a class="small" href="<?php echo url('admin', 'posts-add') ?>">
         Add a post
     </a>
 </h2>
@@ -105,10 +108,10 @@
     <?php foreach ($posts as $post): ?> 
     <li>
         <h3 class="post-title">
-            <a href="/admin/posts-edit/<?php echo $post['id'] ?>">
+            <a href="<?php echo url('admin', 'posts-edit', $post['id']) ?>">
                 <?php echo $post['title'] ?> 
             </a>
-            <a class="small" href="/admin/posts-remove/<?php echo $post['id'] ?>">
+            <a class="small" href="<?php echo url('admin', 'posts-remove', $post['id']) ?>">
                 remove post
             </a>
         </h3>
@@ -124,6 +127,8 @@
 <?php else: ?> 
     <p>
         No posts, create 
-        <a href="/admin/posts-add/">one</a> instead.
+        <a href="<?php echo url('admin', 'posts-add') ?>">
+            one
+        </a> instead.
     </p>
 <?php endif; ?> <?php } ?>

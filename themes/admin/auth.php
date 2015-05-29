@@ -14,7 +14,8 @@
             </p>
             <?php endif; ?>
         
-            <form action="/admin/login-post/" class="form" method="post">
+            <form action="<?php echo url('admin', 'login-post') ?>" 
+                  class="form" method="post">
                 <label>
                     Username: 
                     <input name="username" type="text"/>

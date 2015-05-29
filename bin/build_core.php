@@ -7,10 +7,9 @@
  * @return string
  */
 function clean_tags ($text) {
-    static $tags = array('<?php', '<?', '?>');
-    static $replace = array('', '', '');
+    $tags = '/(^<\?(php)?|\?>\s*$)/';
     
-    return str_replace($tags, $replace, $text);
+    return preg_replace($tags, '', $text);
 }
 
 /**
@@ -19,7 +18,7 @@ function clean_tags ($text) {
  * @param string $content
  */
 function compress_file ($content) {
-    $comments = '/((?:#|\/\/)[^\n]*|\/\*[^\/]*\/)/';
+    $comments = '/(?<=\s)((?:#|\/\/)[^\n]*|\/\*[^\/]*\/)/';
     $spaces = '/(\n|\s{4,}|\t)/';
     
     $content = preg_replace($comments, '', $content);
@@ -47,7 +46,7 @@ function main ($json_config) {
     foreach ($files as $file) {
         $file_content = file_get_contents($basepath . $file);
         $file_content = clean_tags($file_content);
-    
+        
         $content .= $file_content;
     }
     

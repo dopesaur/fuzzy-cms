@@ -27,7 +27,9 @@ function format_date ($date) {
 <title>
     <?php echo $title ?> - Default site
 </title>
-<link href="/assets/css/styles.css" rel="stylesheet" type="text/css"/>
+<link href="<?php echo url('assets/css/styles.css') ?>" 
+      rel="stylesheet" 
+      type="text/css"/>
 <?php }  function theme_default_blocks_header (array $__data) {  extract($__data); ?><header class="wrapper" id="header">
     <h1>
         <a href="<?php echo url() ?>">
@@ -66,7 +68,7 @@ function format_date ($date) {
 <?php foreach ($posts as $post): ?> 
     <li>
         <h1 class="post-title">
-            <a href="/post/view/<?php echo $post['id'] ?>">
+            <a href="<?php echo url('post', 'view', $post['id']) ?>">
                 <?php echo $post['title'] ?> 
             </a>
         </h1>
