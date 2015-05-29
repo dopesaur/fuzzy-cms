@@ -1,13 +1,13 @@
 # Fuzzy CMS
 
-One file CMS written in PHP (not really, see disclaimer).
+One file CMS written in PHP (not really, see the disclaimer).
 
-## So wut the point?
+## "So wut the point?"
 
 The point is... wait for it... play well with FTP and git, and be efficient, pretty much that.
 
-I know there's deployment systems, and other cool stuff for cool guys, and bla bla bla, but 
-tiny CMS in one file (in few files, actually, see disclaimer) with ability to version **everything** is quite cool.
+I know there's deployment systems (based on git), and other cool stuff for cool guys, and bla bla bla, **but** 
+one tiny CMS in a file (in few files, actually, see the disclaimer) with ability to version **everything** is quite cool.
 
 What do you think of that?
 
@@ -25,6 +25,7 @@ There are some **real** benefits of using this CMS:
 1. It's fast, 'cuz there's no real database
 2. It's simple, no complicated settings or so, just grab copy and set `777` permission to content folder, and that's it!
 3. It's tiny, few files and that's it!
+4. Less chances of somebody being dig into your code (haha compressed file, phhh)
 
 That's everything I can think of.
 
@@ -40,17 +41,17 @@ chmod a+x bin/build.sh
 ./bin/build.sh
 ```
 
-To build everything.
+To build everything (core and two themes).
 
-## "No, thanks, I'll take built ones."
+## "No, thanks, I'll take two compressed ones."
 
-There are also already builded files are in `build` directory.
+There are also already built files which are located in `build` directory.
 
 * `index.php` is core file
 * `themes/default.php` is default template
 * `themes/admin.php` is admin template
 
-To install, you need to copy those files (`index.php` and folder `themes`) to your website folder. 
+To install this CMS, you need to copy those files (`index.php` and folder `themes`) to your website folder. 
 
 Then you need to copy `content` and `assets` directories to your new website.
 
