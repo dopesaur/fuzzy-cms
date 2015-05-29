@@ -18,11 +18,17 @@ function format_date ($date) {
     <body>
         <?php view('blocks/header', $__data) ?> 
         
-        <article class="wrapper" id="wrapper">
-            <?php view($view, $__data) ?> 
-        </article>
+        <?php view($view, $__data) ?> 
+        
+        <?php view('blocks/footer') ?> 
     </body>
 </html>
+<?php }  function theme_default_blocks_footer (array $__data) {  extract($__data); ?><footer id="footer">
+    <p>
+        An awesome blog &copy; 
+        <?php echo date('Y') ?>+
+    </p>
+</footer>
 <?php }  function theme_default_blocks_head (array $__data) {  extract($__data); ?><meta charset="UTF-8"/>
 <title>
     <?php echo $title ?> - Default site
@@ -33,13 +39,15 @@ function format_date ($date) {
 <?php }  function theme_default_blocks_header (array $__data) {  extract($__data); ?><header class="wrapper" id="header">
     <h1>
         <a href="<?php echo url() ?>">
-            Default theme
+            Default
         </a>
     </h1>
     
     <p>
-        Subheader, your title goes here - 
-        <a href="<?php echo url('admin') ?>">Admin</a>
+        <a href="<?php echo url() ?>">Latest posts</a>
+        <?php if (is_admin()): ?> 
+        &ndash; <a href="<?php echo url('admin') ?>">Admin</a>
+        <?php endif; ?>
     </p>
 </header>
 <?php }  function theme_default_blocks_pagination (array $__data) {  extract($__data); ?><p>
@@ -63,42 +71,65 @@ function format_date ($date) {
         <?php endif; ?>
     </li>
 <?php endforeach; ?> 
-</ul><?php }  function theme_default_posts_index (array $__data) {  extract($__data);  if ($posts): ?> 
-<ul class="posts">
-<?php foreach ($posts as $post): ?> 
-    <li>
-        <h1 class="post-title">
-            <a href="<?php echo url('post', 'view', $post['id']) ?>">
-                <?php echo $post['title'] ?> 
-            </a>
-        </h1>
-        
-        <p class="date">
-            <?php echo format_date($post['date']) ?> 
+</ul><?php }  function theme_default_posts_index (array $__data) {  extract($__data); ?><div class="cool-wrapper">
+    <section class="wrapper">
+        <h2>Hello there!</h2>
+    
+        <p>
+            This is my blog. I post here posts. 
+            Here, you can see my latest blog posts.
         </p>
-        
-        <?php echo markdown($post['content']) ?> 
-    </li>
-<?php endforeach; ?> 
-</ul>
+    </div>
+</div>
 
-<?php if ($pagination['pages'] > 1): ?>
-    <?php
-        view('blocks/pagination', array(
-            'url'        => url('posts/view'),
-            'pagination' => $pagination
-        )) 
-    ?> 
-<?php endif; ?>  
-<?php else: ?> 
-<p>No posts, m8.</p>
-<?php endif; ?> <?php }  function theme_default_posts_post (array $__data) {  extract($__data); ?><h1 class="post-title">
-    <?php echo $post['title'] ?> 
-</h1>
+<article class="wrapper" id="wrapper">
+    <?php if ($posts): ?> 
+    <ul class="posts">
+    <?php foreach ($posts as $post): ?> 
+        <li>
+            <h1 class="post-title">
+                <a href="<?php echo url('post', 'view', $post['id']) ?>">
+                    <?php echo $post['title'] ?> 
+                </a>
+                
+                <span class="date">
+                    <?php echo format_date($post['date']) ?> 
+                </span>
+            </h1>
+            
+            <p><?php echo $post['description'] ?></p>
+        </li>
+    <?php endforeach; ?> 
+    </ul>
 
-<p class="date">
-    <?php echo format_date($post['date']) ?> 
-</p>
+    <?php if ($pagination['pages'] > 1): ?>
+        <?php
+            view('blocks/pagination', array(
+                'url'        => url('posts/view'),
+                'pagination' => $pagination
+            )) 
+        ?> 
+    <?php endif; ?>  
+    <?php else: ?> 
+    <p>No posts, m8.</p>
+    <?php endif; ?> 
+</article><?php }  function theme_default_posts_post (array $__data) {  extract($__data); ?><div class="cool-wrapper">
+    <section class="wrapper">
+        <h1 class="post-title">
+            <?php echo $post['title'] ?> 
+            
+            <span class="date">
+                <?php echo format_date($post['date']) ?> 
+            </span>
+        </h1>
+                
+        <p>
+            <?php echo $post['description'] ?>
+        </p>
+    </div>
+</div>
 
-<?php echo markdown($post['content']) ?> 
+<article class="wrapper" id="wrapper">
+    <?php echo markdown($post['content']) ?> 
+</article>
 <?php } ?>

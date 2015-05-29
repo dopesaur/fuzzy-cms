@@ -53,19 +53,19 @@
 <title>
     <?php echo $title ?> - Default site
 </title>
-<link href="<?php echo url('assets/css/styles.css') ?>" 
+<link href="<?php echo url('assets/css/admin.css') ?>" 
       rel="stylesheet" 
       type="text/css"/>
 <?php }  function theme_admin_blocks_header (array $__data) {  extract($__data); ?><header class="wrapper" id="header">
     <h1>
         <a href="<?php echo url('admin') ?>">
-            Admin theme
+            Admin
         </a>
     </h1>
     
     <p>
-        <a href="<?php echo url() ?>">Back to site</a> &mdash; 
-        <a href="<?php echo url('admin', 'posts-view') ?>">Admin posts</a> &mdash;
+        <a href="<?php echo url() ?>">Back to site</a> &ndash; 
+        <a href="<?php echo url('admin', 'posts-view') ?>">Admin posts</a> &ndash;
         <a href="<?php echo url('admin', 'logout') ?>">Log out</a>
     </p>
 </header>
@@ -120,7 +120,9 @@
             <?php echo $post['date'] ?> 
         </p>
         
-        <?php echo markdown($post['content']) ?> 
+        <p>
+            <?php echo $post['description'] ?> 
+        </p>
     </li>
     <?php endforeach; ?> 
 </ul>

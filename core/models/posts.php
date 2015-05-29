@@ -26,7 +26,7 @@ function posts_all_paginated ($limit, $page = 1) {
     $offset = $pagination['offset'];
     
     $posts = db_select(
-        'SELECT id, date, title, content FROM posts ORDER BY id DESC LIMIT ? OFFSET ?',
+        'SELECT id, date, title, description FROM posts ORDER BY id DESC LIMIT ? OFFSET ?',
         array($limit, $offset)
     );
     
@@ -52,7 +52,7 @@ function posts_count () {
  */
 function post_by_id ($id) {
     return db_select(
-        'SELECT id, date, title, content FROM posts WHERE id = ?', 
+        'SELECT id, date, title, content, description FROM posts WHERE id = ?', 
         array($id), true
     );
 }

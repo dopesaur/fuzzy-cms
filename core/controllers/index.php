@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @const int POSTS_PER_PAGE self-explanatory
+ */
+define('POSTS_PER_PAGE', 5);
+
+/**
  * Index page
  */
 function route_index_index () {
@@ -17,7 +22,7 @@ function route_posts_view ($page = 1) {
     
     theme('default');
     
-    $posts = posts_all_paginated(5, $page);
+    $posts = posts_all_paginated(POSTS_PER_PAGE, $page);
     
     layout('posts/index', array(
         'title'      => 'All posts',

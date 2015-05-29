@@ -2,6 +2,6 @@
 <title>
     <?php echo $title ?> - Default site
 </title>
-<link href="<?php echo url('assets/css/styles.css') ?>" 
+<link href="<?php echo url('assets/css/admin.css') ?>" 
       rel="stylesheet" 
       type="text/css"/>

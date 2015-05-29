@@ -1,5 +1,5 @@
 /**
- * Styles.css for default theme
+ * Styles for admin theme
  * 
  * @author dopesaur
  * @package Fuzzy
@@ -38,40 +38,19 @@ p {
 }
 
 pre {
-    background-color: #f4f4f4;
     font-family: Menlo, Monaco, monospace;
     line-height: 120%;
     
     margin-bottom: 1em;
-    padding: 16px;
 }
 
 a {
-    color: #87c;
+    color: #07c;
     text-decoration: none;
 }
 
 a:hover {
     text-decoration: underline;
-}
-
-ul,
-ol {
-    font-size: 14px;
-    margin-bottom: 1em;
-    padding-left: 2em;
-}
-
-blockquote {
-    border-left: 2px solid #ccc;
-    color: #666;
-    
-    padding-left: 0.75em;
-}
-
-ul li,
-ol li {
-    line-height: 140%;
 }
 
 h1 .small, 
@@ -114,31 +93,8 @@ h6 .small {
     width: 400px;
 }
 
-/**
- * Cool wrapper
- */
-
-.cool-wrapper {
-    background-color: #24243a;
-    color: #eef;
-    
-    margin-bottom: 1em;
-    padding: 20px 0px;
-}
-
-.cool-wrapper .date {
-    color: #88a;
-}
-
-.cool-wrapper *:last-child {
-    margin-bottom: 0px;
-}
-
-.posts {
+#wrapper ul {
     list-style: none;
-    
-    margin: 2em 0px;
-    padding: 0px;
 }
 
 .posts > * {
@@ -146,11 +102,7 @@ h6 .small {
 }
 
 .post-title {
-    margin-bottom: 0.25em;
-}
-
-.post-title a {
-    color: #33a;
+    margin-bottom: 0em;
 }
 
 .date {
@@ -197,43 +149,8 @@ h6 .small {
     margin-bottom: 24px;
 }
 
-#header {
-    height: 200px;
-    padding-top: 4em;
-}
-
 #header h1 {
-    font-size: 3em;
-    text-align: center;
-    
     margin-bottom: 0.1em;
-}
-
-#header h1 a {
-    color: #228;
-    text-decoration: none;
-}
-
-#header p {
-    font-size: 16px;
-    text-align: center;
-}
-
-/**
- * Footer
- */
-
-#footer {
-    margin-bottom: 2em;
-    padding: 10px 0px;
-}
-
-#footer p {
-    font-size: 12px;
-    color: #88a;
-    font-family: 'Open Sans';
-    text-align: center;
-    margin: 0px;
 }
 
 /**

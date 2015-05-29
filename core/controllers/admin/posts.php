@@ -13,6 +13,27 @@ function route_admin_posts_view () {
 }
 
 /**
+ * Posts form
+ * 
+ * @return array
+ */
+function posts_form () {
+    return array(
+        'title' => array(
+            'type' => 'input'
+        ),
+        
+        'content' => array(
+            'type' => 'text'
+        ),
+        
+        'description' => array(
+            'type' => 'input'
+        )
+    );
+}
+
+/**
  * Display post creation form
  */
 function route_admin_posts_add () {
@@ -26,15 +47,7 @@ function route_admin_posts_add () {
         'title'  => 'View posts',
         'action' => 'add',
         
-        'form' => array(
-            'title' => array(
-                'type' => 'input'
-            ),
-            
-            'content' => array(
-                'type' => 'text'
-            )
-        )
+        'form' => posts_form()
     ));
 }
 
@@ -59,27 +72,23 @@ function route_admin_posts_edit ($id = 0) {
     
     theme('admin');
     
-    $post = db_find('posts', 'title, content', $id);
+    $post = db_find('posts', 'title, content, description', $id);
     
-    if (!$post) {
+     if (!$post) {
         not_found();
+    }
+    
+    $form = posts_form();
+    
+    foreach ($post as $key => $value) {
+        $form[$key]['value'] = $value;
     }
     
     layout('posts/modify', array(
         'title'  => 'View posts',
         'action' => 'edit',
         
-        'form' => array(
-            'title' => array(
-                'type'  => 'input',
-                'value' => array_get($post, 'title')
-            ),
-            
-            'content' => array(
-                'type'  => 'text',
-                'value' => array_get($post, 'content')
-            )
-        )
+        'form' => $form
     ));
 }
 

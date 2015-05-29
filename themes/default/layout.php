@@ -7,8 +7,8 @@
     <body>
         <?php view('blocks/header', $__data) ?> 
         
-        <article class="wrapper" id="wrapper">
-            <?php view($view, $__data) ?> 
-        </article>
+        <?php view($view, $__data) ?> 
+        
+        <?php view('blocks/footer') ?> 
     </body>
 </html>
