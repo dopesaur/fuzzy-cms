@@ -11,8 +11,15 @@
     padding: 0px;
 }
 
+html {
+    height: 100%;
+}
+
 body {
+    border-left: 4px solid #334;
     font-family: sans-serif;
+    
+    min-height: 100%
 }
 
 h1, h2, h3,
@@ -69,11 +76,16 @@ blockquote {
     font-style: italic;
     
     margin-bottom: 1em;
+    padding: 0.35em 0px;
     padding-left: 0.5em;
 }
 
 blockquote p {
     margin-bottom: 0.25em;
+}
+
+blockquote p:last-child {
+    margin-bottom: 0px;
 }
 
 ul li,
@@ -166,6 +178,25 @@ h6 .small {
 
 .post-title a {
     color: #35a;
+}
+
+.post h1,
+.post h2,
+.post h3,
+.post h4,
+.post h5,
+.post h6 {
+    margin-top: 1.5em;
+    margin-bottom: 0.2em;
+}
+
+.post h1:first-child,
+.post h2:first-child,
+.post h3:first-child,
+.post h4:first-child,
+.post h5:first-child,
+.post h6:first-child {
+    margin-top: 0px;
 }
 
 .post a {
