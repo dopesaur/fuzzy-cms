@@ -8,15 +8,15 @@
 <ul class="pagination">
 <?php foreach ($pagination['items'] as $page): ?> 
     <li>
-        <?php if ((int)$page !== (int)$pagination['page']): ?>
+        <?php if ((int)$page !== (int)$pagination['page']): ?> 
         <a href="<?php echo "$url/$page" ?>">
             <?php echo $page ?> 
         </a>
-        <?php else: ?>
+        <?php else: ?> 
         <span>
             <?php echo $page ?> 
         </span>
-        <?php endif; ?>
+        <?php endif; ?> 
     </li>
 <?php endforeach; ?> 
 </ul>
