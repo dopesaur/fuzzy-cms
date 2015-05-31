@@ -18,12 +18,14 @@ function format_date ($date) {
     <body>
         <?php view('blocks/header', $__data) ?> 
         
-        <?php view($view, $__data) ?> 
+        <article class="wrapper" id="wrapper">
+            <?php view($view, $__data) ?> 
+        </article>
         
         <?php view('blocks/footer') ?> 
     </body>
 </html>
-<?php }  function theme_default_blocks_footer (array $__data) {  extract($__data); ?><footer id="footer">
+<?php }  function theme_default_blocks_footer (array $__data) {  extract($__data); ?><footer class="wrapper" id="footer">
     <p>
         An awesome blog &copy; 
         <?php echo date('Y') ?>+
@@ -60,76 +62,67 @@ function format_date ($date) {
 <ul class="pagination">
 <?php foreach ($pagination['items'] as $page): ?> 
     <li>
-        <?php if ((int)$page !== (int)$pagination['page']): ?>
+        <?php if ((int)$page !== (int)$pagination['page']): ?> 
         <a href="<?php echo "$url/$page" ?>">
             <?php echo $page ?> 
         </a>
-        <?php else: ?>
+        <?php else: ?> 
         <span>
             <?php echo $page ?> 
         </span>
-        <?php endif; ?>
+        <?php endif; ?> 
     </li>
 <?php endforeach; ?> 
-</ul><?php }  function theme_default_posts_index (array $__data) {  extract($__data); ?><div class="cool-wrapper">
-    <section class="wrapper">
-        <h2>Hello there!</h2>
-    
-        <p>
-            This is my blog. I post here posts. 
-            Here, you can see my latest blog posts.
-        </p>
-    </div>
-</div>
+</ul><?php }  function theme_default_posts_index (array $__data) {  extract($__data); ?><h2>Hello there!</h2>
 
-<article class="wrapper" id="wrapper">
-    <?php if ($posts): ?> 
-    <ul class="posts">
-    <?php foreach ($posts as $post): ?> 
-        <li>
-            <h1 class="post-title">
-                <a href="<?php echo url('post', 'view', $post['id']) ?>">
-                    <?php echo $post['title'] ?> 
-                </a>
-                
-                <span class="date">
-                    <?php echo format_date($post['date']) ?> 
-                </span>
-            </h1>
-            
-            <p><?php echo $post['description'] ?></p>
-        </li>
-    <?php endforeach; ?> 
-    </ul>
+<p>
+    This is my blog. I post here posts. 
+    Here, you can see my latest blog posts.
+</p>
 
-    <?php if ($pagination['pages'] > 1): ?>
-        <?php
-            view('blocks/pagination', array(
-                'url'        => url('posts/view'),
-                'pagination' => $pagination
-            )) 
-        ?> 
-    <?php endif; ?>  
-    <?php else: ?> 
-    <p>No posts, m8.</p>
-    <?php endif; ?> 
-</article><?php }  function theme_default_posts_post (array $__data) {  extract($__data); ?><div class="cool-wrapper">
-    <section class="wrapper">
+<?php if ($posts): ?> 
+<ul class="posts">
+<?php foreach ($posts as $post): ?> 
+    <li>
         <h1 class="post-title">
-            <?php echo $post['title'] ?> 
-            
-            <span class="date">
-                <?php echo format_date($post['date']) ?> 
-            </span>
+            <a href="<?php echo url('post', 'view', $post['id']) ?>">
+                <?php echo $post['title'] ?> 
+            </a>
         </h1>
-                
-        <p>
-            <?php echo $post['description'] ?>
+        
+        <p class="date">
+            <?php echo format_date($post['date']) ?> 
         </p>
-    </div>
-</div>
+        
+        <p><?php echo $post['description'] ?></p>
+    </li>
+<?php endforeach; ?> 
+</ul>
 
-<article class="wrapper" id="wrapper">
+<?php if ($pagination['pages'] > 1): ?> 
+    <?php
+        view('blocks/pagination', array(
+            'url'        => url('posts/view'),
+            'pagination' => $pagination
+        )) 
+    ?> 
+<?php endif; ?> 
+<?php else: ?> 
+<p>No posts, m8.</p>
+<?php endif; ?> 
+<?php }  function theme_default_posts_post (array $__data) {  extract($__data); ?><section class="post">
+    <h1 class="post-title">
+        <?php echo $post['title'] ?> 
+    </h1>
+
+    <p class="date">
+        <?php echo format_date($post['date']) ?> 
+    </p>
+                
+    <p>
+        <?php echo $post['description'] ?> 
+    </p>
+
     <?php echo markdown($post['content']) ?> 
-</article>
+</section>
 <?php } ?>
