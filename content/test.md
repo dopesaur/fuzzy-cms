@@ -1,13 +1,15 @@
-<?php 
-
-$data = array(
-    'title' => 'My title'
-);
-
-?>
+--- json
+{
+    "title": "My title"
+}
+---
 # Test page
 
 Hello there! This is test page.
+
+Some slip ispum:
+
+> That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows.
 
 ## Second level header
 

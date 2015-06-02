@@ -1,26 +1,27 @@
 {
     "files": [
-        "core/array.php",
-        "core/auth.php",
-        "core/routing.php",
-        "core/db.php",
-        "core/input.php",
-        "core/view_compiled.php",
-        "core/view_common.php",
-        "core/pagination.php",
-        "core/text.php",
+        "fuzzy/core/array.php",
+        "fuzzy/core/auth.php",
+        "fuzzy/core/routing.php",
+        "fuzzy/core/db.php",
+        "fuzzy/core/input.php",
+        "fuzzy/core/view_compiled.php",
+        "fuzzy/core/view_common.php",
+        "fuzzy/core/pagination.php",
+        "fuzzy/core/text.php",
         
-        "core/vendor/Parsedown.php",
-        "core/vendor/Spyc.php",
+        "fuzzy/vendor/Parsedown.php",
+        "fuzzy/vendor/Spyc.php",
         
-        "core/controllers/index.php",
-        "core/controllers/admin/index.php",
-        "core/controllers/admin/auth.php",
-        "core/controllers/admin/posts.php",
+        "fuzzy/controllers/index.php",
+        "fuzzy/controllers/admin/index.php",
+        "fuzzy/controllers/admin/auth.php",
+        "fuzzy/controllers/admin/posts.php",
         
-        "core/models/posts.php",
-        "core/basepath.php",
-        "core/bootstrap.php"
+        "fuzzy/models/posts.php",
+        
+        "fuzzy/basepath.php",
+        "fuzzy/bootstrap.php"
     ],
     
     "destination": "build/index.php",

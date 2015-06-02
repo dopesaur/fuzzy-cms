@@ -6,12 +6,13 @@ _We_ need to finish this CMS at some point, so there's a list of features that I
 
 There are some features that I would like to implement in Fuzzy (funny name, huh?):
 
-1. Extension API (modules and stuff)
-2. Flexible content management
-3. API for integrating different text formatters (markdown, textile, etc.)
-4. Custom layouts and templates
-5. Three CMS modes: dynamic, dynamic + cached, and static
-6. More to come
+- [ ] Extension API (modules and stuff)
+- [ ] Flexible content management
+- [ ] API for integrating different text formatters (markdown, textile, etc.)
+- [ ] Custom layouts and templates
+- [ ] Three CMS modes: dynamic, dynamic + cached, and static
+
+More to come...
 
 ## Feature request?
 

@@ -11,13 +11,13 @@ date_default_timezone_set('America/Los_Angeles');
 
 session_start();
 
-// add_processor('json', function ($config) { 
-//     return json_decode($config, true); 
-// });
-// 
-// add_processor('yaml', function ($config) {
-//     return yaml($config); 
-// });
+add_processor('json', function ($config) { 
+    return json_decode($config, true); 
+});
+
+add_processor('yaml', function ($config) {
+    return yaml($config); 
+});
 
 auth_user(
     array_get($_SESSION, 'username'),
