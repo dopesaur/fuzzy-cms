@@ -15,7 +15,8 @@ function clean_tags ($text) {
 /**
  * Compress php file
  * 
- * @link
+ * @link  http://stackoverflow.com/questions/503871/ ¬
+ *        best-way-to-automatically-remove-comments-from-php-code
  * @param string $content
  */
 function compress_file ($content) {

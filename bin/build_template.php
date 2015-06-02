@@ -38,22 +38,13 @@ function wrap_in_function ($name, $content, $theme) {
 }
 
 /**
- * Entry point
+ * Concatenate theme
  * 
- * @todo decompose this function
+ * @param array $files
  * @param string $theme
+ * @return string
  */
-function main ($theme = 'default') {
-    $basepath = dirname(__DIR__);
-    
-    $themes_directory = "$basepath/themes";
-    $destination_directory = "$basepath/build/themes";
-    
-    if (!file_exists("$themes_directory/$theme")) {
-        throw new Exception("Theme '$theme' doesn't exists!");
-    }
-    
-    $files = glob_recursive("$themes_directory/$theme/*.php");
+function concat_theme ($files, $theme) {
     $content = '';
     
     foreach ($files as $file) {
@@ -68,7 +59,26 @@ function main ($theme = 'default') {
         }
     }
     
-    $content = str_replace('?><?php', '', $content);
+    return str_replace('?><?php', '', $content);
+}
+
+/**
+ * Entry point
+ * 
+ * @param string $theme
+ */
+function main ($theme = 'default') {
+    $basepath = dirname(__DIR__);
+    
+    $themes_directory = "$basepath/themes";
+    $destination_directory = "$basepath/build/themes";
+    
+    if (!file_exists("$themes_directory/$theme")) {
+        throw new Exception("Theme '$theme' doesn't exists!");
+    }
+    
+    $files = glob_recursive("$themes_directory/$theme/*.php");
+    $content = concat_theme($files, $theme);
     
     file_put_contents("$destination_directory/$theme.php", $content);
 }
