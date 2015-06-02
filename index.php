@@ -19,7 +19,7 @@ require 'core/pagination.php';
 
 /* Outsiders */
 require 'core/vendor/Parsedown.php';
-require 'core/vendor/Spyc.php';
+// require 'core/vendor/Spyc.php';
 
 /** Controllers includes */
 require 'core/controllers/index.php';

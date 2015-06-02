@@ -41,14 +41,15 @@ function wrap_in_function ($name, $content, $theme) {
  * Concatenate theme
  * 
  * @param array $files
+ * @param string $directory
  * @param string $theme
  * @return string
  */
-function concat_theme ($files, $theme) {
+function concat_theme ($files, $directory, $theme) {
     $content = '';
     
     foreach ($files as $file) {
-        $filename = str_replace("$themes_directory/$theme/", '', $file);
+        $filename = str_replace("$directory/$theme/", '', $file);
         $file_content = file_get_contents($file);
         
         if ($filename === 'functions.php') {
@@ -78,7 +79,7 @@ function main ($theme = 'default') {
     }
     
     $files = glob_recursive("$themes_directory/$theme/*.php");
-    $content = concat_theme($files, $theme);
+    $content = concat_theme($files, $themes_directory, $theme);
     
     file_put_contents("$destination_directory/$theme.php", $content);
 }
