@@ -15,13 +15,30 @@ function clean_tags ($text) {
 /**
  * Compress php file
  * 
+ * @link
  * @param string $content
  */
 function compress_file ($content) {
-    $comments = '/(?<=\s)((?:#|\/\/)[^\n]*|\/\*[^\/]*\/)/';
-    $spaces = '/(\n|\s{4,}|\t)/';
+    $commentTokens = array(T_COMMENT, T_DOC_COMMENT);
+
+    $tokens = token_get_all($content);
+    $new_content = '';
     
-    $content = preg_replace($comments, '', $content);
+    foreach ($tokens as $token) {    
+        if (is_array($token)) {
+            if (in_array($token[0], $commentTokens)) {
+                continue;
+            }
+
+            $token = $token[1];
+        }
+
+        $new_content .= $token;
+    }
+    
+    $content = $new_content;
+    $spaces = '/(\n|\r\n|\s{4,}|\t)/';
+    
     $content = preg_replace($spaces, '', $content);
     $content = str_replace('<?php', '<?php ', $content);
     

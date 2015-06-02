@@ -8,8 +8,10 @@
         "core/view_compiled.php",
         "core/view_common.php",
         "core/pagination.php",
+        "core/text.php",
         
         "core/vendor/Parsedown.php",
+        "core/vendor/Spyc.php",
         
         "core/controllers/index.php",
         "core/controllers/admin/index.php",

@@ -24,6 +24,8 @@ auth_user(
     array_get($_SESSION, 'password')
 );
 
+theme('default');
+
 db_connect(BASEPATH . '/content/db.sqlite');
 
 dispatch(array_get($_GET, 'route', ''));

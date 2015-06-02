@@ -25,7 +25,7 @@ function format_date ($date) {
         <?php view('blocks/footer') ?> 
     </body>
 </html>
-<?php }  function theme_default_blocks_footer (array $__data) {  extract($__data); ?><footer class="wrapper" id="footer">
+<?php }  function theme_default_page (array $__data) {  extract($__data);  echo $content;  }  function theme_default_blocks_footer (array $__data) {  extract($__data); ?><footer class="wrapper" id="footer">
     <p>
         An awesome blog &copy; 
         <?php echo date('Y') ?>+
@@ -47,6 +47,7 @@ function format_date ($date) {
     
     <p>
         <a href="<?php echo url() ?>">Latest posts</a>
+        &ndash; <a href="<?php echo url('test') ?>">Test page</a>
         <?php if (is_admin()): ?> 
         &ndash; <a href="<?php echo url('admin') ?>">Admin</a>
         <?php endif; ?>
