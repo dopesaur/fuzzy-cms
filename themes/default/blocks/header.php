@@ -7,6 +7,7 @@
     
     <p>
         <a href="<?php echo url() ?>">Latest posts</a>
+        &ndash; <a href="<?php echo url('test') ?>">Test page</a>
         <?php if (is_admin()): ?> 
         &ndash; <a href="<?php echo url('admin') ?>">Admin</a>
         <?php endif; ?>

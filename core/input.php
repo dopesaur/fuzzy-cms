@@ -10,3 +10,13 @@ function is_post () {
     
     return strtolower($method) === 'post';
 }
+
+/**
+ * Utility function for constructing paths relative to BASEPATH
+ * 
+ * @param string $path
+ * @return string
+ */
+function basepath ($path = '') {
+    return sprintf('%s/%s', BASEPATH, $path);
+}

@@ -5,11 +5,12 @@
  * 
  * @param string $view
  * @param array $data
+ * @param string $layout
  */
-function layout ($view, array $data = array()) {
+function layout ($view, array $data = array(), $layout = 'layout') {
     $data['view'] = $view;
     
-    view('layout', $data);
+    view($layout, $data);
 }
 
 /**
@@ -33,15 +34,15 @@ function redirect ($path) {
 }
 
 /**
- * Process markdown via Parsedown
+ * Capture output
  * 
- * @param string $markdown
+ * @param callable $callback
+ * @return string
  */
-function markdown ($markdown) {
-    static $parse = null;
+function capture ($callback) {
+    ob_start();
     
-    // My® signature© move™
-    $parse or $parse = new Parsedown;
+    $callback();
     
-    return $parse->text($markdown);
+    return ob_get_clean();
 }

@@ -180,26 +180,26 @@ h6 .small {
     color: #35a;
 }
 
-.post h1,
-.post h2,
-.post h3,
-.post h4,
-.post h5,
-.post h6 {
+#wrapper h1,
+#wrapper h2,
+#wrapper h3,
+#wrapper h4,
+#wrapper h5,
+#wrapper h6 {
     margin-top: 1.5em;
     margin-bottom: 0.2em;
 }
 
-.post h1:first-child,
-.post h2:first-child,
-.post h3:first-child,
-.post h4:first-child,
-.post h5:first-child,
-.post h6:first-child {
+#wrapper h1:first-child,
+#wrapper h2:first-child,
+#wrapper h3:first-child,
+#wrapper h4:first-child,
+#wrapper h5:first-child,
+#wrapper h6:first-child {
     margin-top: 0px;
 }
 
-.post a {
+#wrapper a {
     text-decoration: underline;
 }
 
