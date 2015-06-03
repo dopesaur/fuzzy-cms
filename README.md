@@ -18,7 +18,7 @@ There are some benefits of using this CMS:
 1. ~~No one will try to modify or steal CMS from you~~
 2. ~~Sometimes it's tiny, simple, and fast~~
 
-![Reasons to date me](http://cdn.meme.am/instances/400x/54410499.jpg)
+![Reasons to date me](http://cdn.themetapicture.com/pic/images/2014/09/02/funny-reasons-date-Zach-Galifianakis.jpg)
 
 Not really :smile:
 
