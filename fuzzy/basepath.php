@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * @const float  FUZZY_START Start time
  * @const string BASEPATH Basepath
  */
-define('BASEPATH', chop(__DIR__, '/'));
+define('FUZZY_START', microtime(true));
+define('BASEPATH'   , chop(__DIR__, '/'));

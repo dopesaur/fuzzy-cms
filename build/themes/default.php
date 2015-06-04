@@ -33,7 +33,7 @@ function format_date ($date) {
 </footer>
 <?php }  function theme_default_blocks_head (array $__data) {  extract($__data); ?><meta charset="UTF-8"/>
 <title>
-    <?php echo $title ?> - Default site
+    <?php isset($title) and print($title) ?> - Default site
 </title>
 <link href="<?php echo url('assets/css/styles.css') ?>" 
       rel="stylesheet" 

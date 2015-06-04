@@ -54,6 +54,7 @@ function route_exists ($prefix, $suffix) {
  * @return bool
  */
 function route_content ($path) {
+    $path = clean_url($path);
     $path = basepath("content/$path");
     
     if (
@@ -109,4 +110,16 @@ function url () {
     $url = trim($url, '/');
     
     return "/$url";
+}
+
+/**
+ * Cleanup url
+ * 
+ * @param string $url
+ * @return string
+ */
+function clean_url ($url) {
+    $url = preg_replace('/\/+/', '/', $url);
+    
+    return str_replace('..', '', $url);
 }

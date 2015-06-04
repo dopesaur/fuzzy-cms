@@ -9,6 +9,8 @@ define('BASEPATH'   , chop(__DIR__, '/'));
 
 /** Core includes */
 require 'fuzzy/core/array.php';
+require 'fuzzy/core/storage.php';
+require 'fuzzy/core/config.php';
 require 'fuzzy/core/view.php';
 require 'fuzzy/core/view_common.php';
 require 'fuzzy/core/routing.php';
@@ -17,10 +19,7 @@ require 'fuzzy/core/auth.php';
 require 'fuzzy/core/input.php';
 require 'fuzzy/core/text.php';
 require 'fuzzy/core/pagination.php';
-
-/* Outsiders */
-require 'fuzzy/vendor/Parsedown.php';
-require 'fuzzy/vendor/Spyc.php';
+require 'fuzzy/core/extensions.php';
 
 /** Controllers includes */
 require 'fuzzy/controllers/index.php';

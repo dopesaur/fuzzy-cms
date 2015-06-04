@@ -1,7 +1,5 @@
---- json
-{
-    "title": "My title"
-}
+---
+title: Hello world!
 ---
 # Test page
 

@@ -1,9 +1,19 @@
 <?php
 
-// Sorry guys
-global $processors;
-
-$processors = array();
+/**
+ * Processors storage
+ * 
+ * @param string $key
+ * @param mixed $value
+ * @return mixed
+ */
+function processors ($key = null, $value = null) {
+    static $storage = null;
+    
+    $storage or $storage = storage();
+    
+    return $storage($key, $value);
+}
 
 /**
  * Add a processor
@@ -12,10 +22,7 @@ $processors = array();
  * @param callable $processor
  */
 function add_processor ($name, $processor) {
-    // Sorry guys
-    global $processors;
-    
-    $processors[$name] = $processor;
+    processors($name, $processor);
 }
 
 /**
@@ -25,12 +32,14 @@ function add_processor ($name, $processor) {
  * @param string $config
  */
 function process ($name, $config) {
-    // Sorry guys
-    global $processors;
+    $processor = processors($name);
     
-    $processor = $processors[$name];
-    
-    return $processor($config);
+    if (is_callable($processor)) {
+        return $processor($config);
+    }
+    else {
+        return $config;
+    }
 }
 
 /**
@@ -52,9 +61,18 @@ function process_file ($file) {
     
     if (empty($input)) {
         list($input, $content) = process_content($content);
+        
+        if (!is_array($input)) {
+            $input = array();
+        }
     }
     
-    $input['content'] = markdown($content);
+    $processor = array_get(
+        $input, 'processor', 
+        config('general.processing.content')
+    );
+    
+    $input['content'] = $processor ? process($processor, $content) : $content;
     
     return $input;
 }
@@ -69,21 +87,18 @@ function process_content ($content) {
     $first  = strpos($content, '---');
     $second = strpos($content, '---', 1);
     
-    if (
-        $first !==  0 ||
-        $second === -1
-    ) {
+    if ($first !== 0 || $second === -1) {
         return array(array(), $content);
     }
     
-    $config = trim(
-        substr($content, $first + 3, $second - 3)
-    );
+    $config = substr($content, $first + 3, $second - 3);
     
     $newline = strpos($config, "\n");
     
     $processor = trim(substr($config, 0, $newline));
-    $config = substr($config, $newline + 1);
+    $processor = $processor ? $processor : config('general.processing.header');
+    
+    $config = substr($config, $newline);
     
     return array(
         process($processor, $config),
@@ -95,22 +110,12 @@ function process_content ($content) {
  * Process markdown via Parsedown
  * 
  * @param string $markdown
+ * @return string
  */
 function markdown ($markdown) {
     static $parse = null;
     
-    // My® signature© move™
     $parse or $parse = new Parsedown;
     
     return $parse->text($markdown);
-}
-
-/**
- * Alias for Spyc YAML function
- * 
- * @param string $string
- * @return array
- */
-function yaml ($string) {
-    return spyc_load($string);
 }

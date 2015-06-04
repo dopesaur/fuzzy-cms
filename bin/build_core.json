@@ -2,16 +2,16 @@
     "files": [
         "fuzzy/core/array.php",
         "fuzzy/core/auth.php",
-        "fuzzy/core/routing.php",
+        "fuzzy/core/config.php",
         "fuzzy/core/db.php",
+        "fuzzy/core/extensions.php",
         "fuzzy/core/input.php",
-        "fuzzy/core/view_compiled.php",
-        "fuzzy/core/view_common.php",
         "fuzzy/core/pagination.php",
+        "fuzzy/core/routing.php",
+        "fuzzy/core/storage.php",
         "fuzzy/core/text.php",
-        
-        "fuzzy/vendor/Parsedown.php",
-        "fuzzy/vendor/Spyc.php",
+        "fuzzy/core/view_common.php",
+        "fuzzy/core/view_compiled.php",
         
         "fuzzy/controllers/index.php",
         "fuzzy/controllers/admin/index.php",

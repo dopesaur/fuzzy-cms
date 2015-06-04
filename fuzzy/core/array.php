@@ -1,7 +1,7 @@
 <?php 
 
 /**
- * Get a key from array if is set
+ * Get a key from multidimensional array if is set
  * 
  * @param array $array
  * @param string $key
@@ -12,5 +12,29 @@ function array_get (array $array, $key, $default = false) {
         return $array[$key];
     }
     
+    $keys = explode('.', $key);
+    $key = array_shift($keys);
+    
+    while ($key !== null && isset($array[$key])) {
+        $array = $array[$key];
+        
+        $key = array_shift($keys);
+    }
+    
+    if ($array !== null && $key === null) {
+        return $array;
+    }
+    
     return $default;
+}
+
+/**
+ * Set a value in array
+ * 
+ * @param array $array
+ * @param string $key
+ * @param mixed $value
+ */
+function array_set (array &$array, $key, $value) {
+    $array[$key] = $value;
 }
