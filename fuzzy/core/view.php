@@ -8,7 +8,7 @@
  * @return string
  */
 function view_path ($theme, $file) {
-    return sprintf('%s/themes/%s/%s.php', BASEPATH, $theme, $file);
+    return basepath("themes/$theme/$file.php");
 }
 
 /**

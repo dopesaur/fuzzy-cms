@@ -26,7 +26,7 @@ function pagination ($total, $limit, $page) {
     
     $pages = ceil($total / $limit);
     $items = range(1, $pages);
-    $page = clamp($page, 1, $pages);
+    $page  = clamp($page, 1, $pages);
     
     $offset = $limit * ($page - 1);
     

@@ -29,6 +29,10 @@ function view ($view, array $data = array()) {
     
     $theme = theme();
     
-    $function = "theme_{$theme}_{$view}";
-    $function($data);
+    if (function_exists($function = "theme_{$theme}_{$view}")) {
+        $function($data);
+    }
+    else if (function_exists($function = "theme_{$view}")) {
+        $function($data);
+    }
 }

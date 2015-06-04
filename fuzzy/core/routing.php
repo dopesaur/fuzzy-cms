@@ -20,14 +20,11 @@ function dispatch ($route) {
     
     $function = route_exists($prefix, $suffix);
     
-    // If not exists, try to route route to content
     if (!$function) {
-        // If routing to content wasn't successful, show 404
         if (!route_content($route)) {
             not_found();
         }
         
-        // Exit from function in case of content routing success
         return;
     }
     
@@ -83,6 +80,7 @@ function route_content ($path) {
  * 
  * @param string $root
  * @param string $base
+ * @return string
  */
 function base_url ($root = null, $base = null) {
     $root = trim($root ? $root : $_SERVER['DOCUMENT_ROOT'], '/');
@@ -100,16 +98,14 @@ function base_url ($root = null, $base = null) {
 /**
  * Get URL to a route
  * 
- * @param mixed ...$url_segments
+ * @param mixed ...$segments
+ * @return string
  */
 function url () {
-    $url = '';
+    $base = base_url();
     
-    if (func_num_args() !== 0) {
-        $url = implode('/', func_get_args());
-    }
-    
-    $url = base_url() . "/$url/";
+    $url = implode('/', func_get_args());
+    $url = "$base/$url/";
     $url = trim($url, '/');
     
     return "/$url";
