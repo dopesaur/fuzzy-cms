@@ -10,7 +10,7 @@ There are some features that I would like to implement in Fuzzy (funny name, huh
 - [x] Extension API (modules and stuff)
 - [x] Data files (custom data you can use anywhere)
 - [x] Flexible content management
-- [x] Custom layouts and templates
+- [x] Custom layouts
 - [ ] Browse content API
 - [ ] Build static website out of `content` and of all the extensions (next stream)
 - [ ] Ability to cache content into `db.sqlite` (next stream, probably)
