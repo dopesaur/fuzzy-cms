@@ -50,10 +50,15 @@ function route_exists ($prefix, $suffix) {
 /**
  * Route the path to content
  * 
+ * @todo decompose
  * @param string $path
  * @return bool
  */
 function route_content ($path) {
+    if (preg_match('/_[\w\d\_\-]/', $path)) {
+        not_found();
+    }
+    
     $path = clean_url($path);
     $path = basepath("content/$path");
     
@@ -64,14 +69,17 @@ function route_content ($path) {
         return false;
     }
     
-    $file  = file_exists("$path.md") ? "$path.md" : "$path/index.md";
+    $file  = file_exists("$path.md") ? "$path.md" : "$path/index.md";    
     $input = process_file($file);
     
-    layout(
-        array_get($input, 'template', 'page'), 
-        $input,
-        array_get($input, 'layout', 'layout')
-    );
+    $layout = array_get($input, 'layout');
+    $layout = basepath("content/_layouts/$layout.php");
+    
+    if (!file_exists("$layout")) {
+        $layout = 'page';
+    }
+    
+    layout($layout, $input);
     
     return true;
 }

@@ -29,3 +29,34 @@ function storage (array $default = array()) {
         return $default;
     };
 }
+
+/**
+ * Lazy-load storage
+ * 
+ * @param string $path
+ * @return callable
+ */
+function lazy_storage ($path) {
+    $array = array();
+    
+    /**
+     * Closure
+     * 
+     * @param string $key
+     * @param mixed $default
+     * @return mixed
+     */
+    return function ($key, $default = false) use (&$array, $path) {
+        $first = current(explode('.', $key));
+        
+        if (!isset($array[$first])) {
+            $config = "$path/$first.php";
+        
+            if (file_exists($config)) {
+                $array[$first] = require $config;
+            }
+        }
+    
+        return array_get($array, $key, $default);
+    };
+}

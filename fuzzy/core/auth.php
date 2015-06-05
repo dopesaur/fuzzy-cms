@@ -25,8 +25,8 @@ function is_admin ($authorized = false) {
  */
 function auth_user ($username, $password) {
     if (
-        $username === 'admin' && 
-        $password === md5('123456')
+        $username === config('users.username') && 
+        $password === config('users.password')
     ) {
         return is_admin(true);
     }

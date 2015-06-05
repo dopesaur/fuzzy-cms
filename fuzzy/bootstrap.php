@@ -7,7 +7,9 @@
 error_reporting(-1);
 ini_set('display_errors', 1);
 
-date_default_timezone_set('America/Los_Angeles');
+date_default_timezone_set(
+    config('general.timezone', 'Europe/London')
+);
 
 session_start();
 
@@ -18,8 +20,8 @@ auth_user(
     array_get($_SESSION, 'password')
 );
 
-theme(config('general.theme'));
+theme(config('general.theme', 'default'));
 
-db_connect(BASEPATH . '/content/db.sqlite');
+db_connect(basepath('content/db.sqlite'));
 
 dispatch(array_get($_GET, 'route', ''));

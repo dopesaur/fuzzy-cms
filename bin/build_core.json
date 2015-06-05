@@ -3,6 +3,7 @@
         "fuzzy/core/array.php",
         "fuzzy/core/auth.php",
         "fuzzy/core/config.php",
+        "fuzzy/core/content.php",
         "fuzzy/core/db.php",
         "fuzzy/core/extensions.php",
         "fuzzy/core/input.php",

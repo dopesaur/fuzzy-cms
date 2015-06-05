@@ -21,18 +21,28 @@ function theme ($new_theme = '') {
 /**
  * View the view
  * 
- * @param string $view
+ * @todo decompose
+ * @param string $__view
+ * @param array $__data
  */
-function view ($view, array $data = array()) {
-    $view = str_replace('/', '_', $view);
+function view ($__view, array $__data = array()) {
+    if (strpos($__view, '/') === 0) {
+        extract($__data);
+        
+        require $__view;
+        
+        return;
+    }
+    
+    $view = str_replace('/', '_', $__view);
     $view = preg_replace('/[^\w\d_]/', '', $view);
     
     $theme = theme();
     
     if (function_exists($function = "theme_{$theme}_{$view}")) {
-        $function($data);
+        $function($__data);
     }
     else if (function_exists($function = "theme_{$view}")) {
-        $function($data);
+        $function($__data);
     }
 }

@@ -38,7 +38,11 @@ function theme ($new_theme = '') {
  * @param array $__data
  */
 function view ($__view, array $__data = array()) {
+    if (strpos($__view, '/') !== 0) {
+        $__view = view_path(theme(), $__view);
+    }
+    
     extract($__data);
     
-    require view_path(theme(), $__view);
+    require $__view;
 }

@@ -16,16 +16,6 @@ function processors ($key = null, $value = null) {
 }
 
 /**
- * Add a processor
- * 
- * @param string $name
- * @param callable $processor
- */
-function add_processor ($name, $processor) {
-    processors($name, $processor);
-}
-
-/**
  * Process config
  * 
  * @param string $name
@@ -45,6 +35,7 @@ function process ($name, $config) {
 /**
  * Process a file
  * 
+ * @todo decompose
  * @param string $file
  * @return array
  */
@@ -80,6 +71,7 @@ function process_file ($file) {
 /**
  * Process content
  * 
+ * @todo decompose
  * @param string $content
  * @return array
  */
@@ -104,18 +96,4 @@ function process_content ($content) {
         process($processor, $config),
         substr($content, $second + 3)
     );
-}
-
-/**
- * Process markdown via Parsedown
- * 
- * @param string $markdown
- * @return string
- */
-function markdown ($markdown) {
-    static $parse = null;
-    
-    $parse or $parse = new Parsedown;
-    
-    return $parse->text($markdown);
 }

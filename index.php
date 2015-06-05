@@ -11,6 +11,7 @@ define('BASEPATH'   , chop(__DIR__, '/'));
 require 'fuzzy/core/array.php';
 require 'fuzzy/core/storage.php';
 require 'fuzzy/core/config.php';
+require 'fuzzy/core/content.php';
 require 'fuzzy/core/view.php';
 require 'fuzzy/core/view_common.php';
 require 'fuzzy/core/routing.php';

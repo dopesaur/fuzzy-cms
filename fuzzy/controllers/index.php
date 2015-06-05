@@ -1,11 +1,6 @@
 <?php
 
 /**
- * @const int POSTS_PER_PAGE self-explanatory
- */
-define('POSTS_PER_PAGE', 5);
-
-/**
  * Index page
  */
 function route_index_index () {
@@ -20,9 +15,7 @@ function route_posts_view ($page = 1) {
         not_found();
     }
     
-    theme('default');
-    
-    $posts = posts_all_paginated(POSTS_PER_PAGE, $page);
+    $posts = posts_all_paginated(config('blog.posts', 5), $page);
     
     layout('posts/index', array(
         'title'      => 'All posts',
@@ -37,8 +30,6 @@ function route_posts_view ($page = 1) {
  * @param string $post_id
  */
 function route_post_view ($post_id = 0) {
-    theme('default');
-    
     $post = post_by_id($post_id);
     
     if (empty($post)) {
