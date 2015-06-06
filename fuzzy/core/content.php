@@ -9,29 +9,16 @@
 /**
  * Browse content
  * 
- * @todo refactor
  * @param string $path
  * @return array
  */
 function browse_content ($path = '') {
     $path = rtrim(basepath("content/$path"), '/');
     
-    $lenght = strlen(basepath('content/'));
-    
     $files = glob("$path/*");
     
-    $files = array_map(
-        function ($file) use ($lenght) {
-            $file = substr($file, $lenght);
-            
-            return substr($file, 0, strpos($file, '.'));
-        }, 
-        $files
-    );
-    
     return array_filter($files, function ($file) {
-        return strpos($file, '.') !== 0
-            || is_dir($file) === false;
+        return strpos($file, '.') !== 0 || !is_dir($file);
     });
 }
 
@@ -59,4 +46,21 @@ function content_file_exists ($file) {
     $path = basepath("content/$file");
     
     return file_exists($path);
+}
+
+/**
+ * Get path to content file
+ * 
+ * @param string $path
+ * @return string
+ */
+function content_path ($path) {
+    $directory = file_exists("$path/index.md");
+    $file      = file_exists("$path.md");
+    
+    if (!$file && !$directory) {
+        return false;
+    }
+    
+    return $file ? "$path.md" : "$path/index.md";
 }

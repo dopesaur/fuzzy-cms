@@ -13,19 +13,10 @@ function dispatch ($route) {
     $segments = explode('/', $route);
     
     $prefix = array_shift($segments);
-    $prefix = $prefix ? $prefix : 'index';
-    
     $suffix = array_shift($segments);
-    $suffix = $suffix ? $suffix : 'index';
     
-    $function = route_exists($prefix, $suffix);
-    
-    if (!$function) {
-        if (!route_content($route)) {
-            not_found();
-        }
-        
-        return;
+    if (!$function = route_exists($prefix, $suffix)) {
+        not_found();
     }
     
     call_user_func_array($function, $segments);
@@ -36,15 +27,16 @@ function dispatch ($route) {
  * 
  * @param string $prefix
  * @param string $suffix
- * @return bool|string
+ * @return string
  */
 function route_exists ($prefix, $suffix) {
-    $route = "route_{$prefix}_{$suffix}";
-    $route = str_replace('-', '_', $route);
-    $route = preg_replace('/[^\w\d_]/', '', $route);
+    $prefix = $prefix ? $prefix : 'index';
+    $suffix = $suffix ? $suffix : 'index';
+    
+    $route = url_to_name("route_{$prefix}_{$suffix}");
     $route = trim($route, '_');
     
-    return function_exists($route) ? $route : false;
+    return function_exists($route) ? $route : '';
 }
 
 /**
@@ -62,24 +54,18 @@ function route_content ($path) {
     $path = clean_url($path);
     $path = basepath("content/$path");
     
-    if (
-        !file_exists("$path.md") && 
-        !file_exists("$path/index.md")
-    ) {
+    $file = content_path($path);
+    
+    if (!$file) {
         return false;
     }
     
-    $file  = file_exists("$path.md") ? "$path.md" : "$path/index.md";    
     $input = process_file($file);
     
     $layout = array_get($input, 'layout');
     $layout = basepath("content/_layouts/$layout.php");
     
-    if (!file_exists("$layout")) {
-        $layout = 'page';
-    }
-    
-    layout($layout, $input);
+    layout(file_exists($layout) ? $layout : 'page', $input);
     
     return true;
 }

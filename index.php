@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * Development version (uncompressed) of Fuzzy CMS
+ * 
+ * @package Fuzzy
+ */
+
+/**
  * @const float  FUZZY_START Start time
  * @const string BASEPATH Basepath
  */

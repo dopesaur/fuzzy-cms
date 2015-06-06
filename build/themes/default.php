@@ -7,7 +7,11 @@
  * @return string
  */
 function format_date ($date) {
-    return date(config('general.date_format', 'm.d.Y'), strtotime($date));
+    static $format = null;
+    
+    $format or $format = config('general.date_format', 'm.d.Y');
+    
+    return date($format, strtotime($date));
 }
  function theme_default_layout (array $__data) {  extract($__data); ?><!DOCTYPE html>
 <html>

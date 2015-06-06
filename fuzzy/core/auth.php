@@ -6,10 +6,10 @@
  * @param bool $authorized
  * @return bool
  */
-function is_admin ($authorized = false) {
+function is_admin ($authorized = null) {
     static $admin = false;
     
-    if ($authorized) {
+    if ($authorized !== null) {
         $admin = $authorized;
     }
     
@@ -24,12 +24,8 @@ function is_admin ($authorized = false) {
  * @return bool
  */
 function auth_user ($username, $password) {
-    if (
+    return is_admin(
         $username === config('users.username') && 
         $password === config('users.password')
-    ) {
-        return is_admin(true);
-    }
-    
-    return false;
+    );
 }

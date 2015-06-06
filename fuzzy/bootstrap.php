@@ -7,9 +7,7 @@
 error_reporting(-1);
 ini_set('display_errors', 1);
 
-date_default_timezone_set(
-    config('general.timezone', 'Europe/London')
-);
+date_default_timezone_set(config('general.timezone', 'Europe/London'));
 
 session_start();
 
@@ -24,4 +22,8 @@ theme(config('general.theme', 'default'));
 
 db_connect(basepath('content/db.sqlite'));
 
-dispatch(array_get($_GET, 'route', ''));
+$route = array_get($_GET, 'route', '');
+
+if (!route_content($route)) {
+    dispatch($route);
+}

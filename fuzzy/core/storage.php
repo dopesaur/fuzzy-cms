@@ -34,11 +34,10 @@ function storage (array $default = array()) {
  * Lazy-load storage
  * 
  * @param string $path
- * @return callable
+ * @param array $array
+ * @return \Closure
  */
-function lazy_storage ($path) {
-    $array = array();
-    
+function lazy_storage ($path, array $array = array()) {
     /**
      * Closure
      * 
@@ -47,7 +46,9 @@ function lazy_storage ($path) {
      * @return mixed
      */
     return function ($key, $default = false) use (&$array, $path) {
-        $first = current(explode('.', $key));
+        $dot = strpos($key, '.');
+        
+        $first = $dot !== false ? substr($key, 0, $dot) : $key;
         
         if (!isset($array[$first])) {
             $config = "$path/$first.php";

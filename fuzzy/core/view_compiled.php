@@ -1,6 +1,25 @@
 <?php
 
 /**
+ * Get view function name, named `view_path` as a fallback for 
+ * `view_path` function in non compiled version
+ * 
+ * @param string $theme
+ * @param string $view
+ * @return string
+ */
+function view_path ($theme, $view) {
+    if (
+        function_exists($function = "theme_{$theme}_{$view}") ||
+        function_exists($function = "theme_{$view}")
+    ) {
+        return $function;
+    }
+    
+    return '';
+}
+
+/**
  * Set or get theme
  * 
  * @param string $new_theme
@@ -27,22 +46,19 @@ function theme ($new_theme = '') {
  */
 function view ($__view, array $__data = array()) {
     if (strpos($__view, '/') === 0) {
-        extract($__data);
-        
-        require $__view;
-        
-        return;
+        return render($__view, $__data);
     }
+    
+    $theme = theme();
     
     $view = str_replace('/', '_', $__view);
     $view = preg_replace('/[^\w\d_]/', '', $view);
     
-    $theme = theme();
+    $function = view_path($theme, $view);
     
-    if (function_exists($function = "theme_{$theme}_{$view}")) {
-        $function($__data);
+    if ($function) {
+        return $function($__data);
     }
-    else if (function_exists($function = "theme_{$view}")) {
-        $function($__data);
-    }
+    
+    throw new Exception("View/layout '$view' in theme '$theme' doesn't exists!");
 }

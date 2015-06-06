@@ -4,9 +4,9 @@
  * Load extensions which are in `extensions/` folder
  */
 function load_extensions () {
-    $extensions = glob(basepath('extensions/*.php'), GLOB_NOSORT);
+    $path = basepath('extensions/*.php');
     
-    foreach ($extensions as $extension) {
+    foreach (glob($path, GLOB_NOSORT) as $extension) {
         require $extension;
     }
 }

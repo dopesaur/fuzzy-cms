@@ -42,7 +42,5 @@ function view ($__view, array $__data = array()) {
         $__view = view_path(theme(), $__view);
     }
     
-    extract($__data);
-    
-    require $__view;
+    render($__view, $__data);
 }

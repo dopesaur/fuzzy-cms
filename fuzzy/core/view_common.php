@@ -1,6 +1,18 @@
 <?php
 
 /**
+ * Render a (php) file view
+ * 
+ * @param string $__view
+ * @param array $__data
+ */
+function render ($__view, array $__data = array()) {
+    extract($__data);
+    
+    require $__view;
+}
+
+/**
  * View the layout
  * 
  * @param string $view
@@ -45,4 +57,16 @@ function capture ($callback) {
     $callback();
     
     return ob_get_clean();
+}
+
+/**
+ * Convert URL to a name
+ * 
+ * @param string $url
+ * @return string
+ */
+function url_to_name ($url) {
+    $url = str_replace('-', '_', $url);
+    
+    return preg_replace('/[^\w\d_]/', '', $url);
 }

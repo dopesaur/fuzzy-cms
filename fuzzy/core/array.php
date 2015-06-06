@@ -31,6 +31,8 @@ function array_get (array $array, $key, $default = false) {
 /**
  * Set a value in array
  * 
+ * @todo make this function able to do cool sutff as array_get
+ *       can do
  * @param array $array
  * @param string $key
  * @param mixed $value

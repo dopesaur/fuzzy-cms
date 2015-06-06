@@ -9,6 +9,8 @@ function route_index_index () {
 
 /**
  * Index page
+ * 
+ * @param string $page
  */
 function route_posts_view ($page = 1) {
     if (!$page) {
@@ -37,7 +39,7 @@ function route_post_view ($post_id = 0) {
     }
     
     layout('posts/post', array(
-        'title' => 'Post ' . $post['title'],
+        'title' => "Post {$post['title']}",
         'post'  => $post,
     ));
 }

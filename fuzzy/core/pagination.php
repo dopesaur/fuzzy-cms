@@ -30,5 +30,5 @@ function pagination ($total, $limit, $page) {
     
     $offset = $limit * ($page - 1);
     
-    return compact('pages', 'items', 'page', 'offset', 'limit');
+    return compact('page', 'pages', 'items', 'offset', 'limit');
 }

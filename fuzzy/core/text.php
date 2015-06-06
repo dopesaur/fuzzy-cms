@@ -24,12 +24,11 @@ function processors ($key = null, $value = null) {
 function process ($name, $config) {
     $processor = processors($name);
     
-    if (is_callable($processor)) {
-        return $processor($config);
+    if (!is_callable($processor)) {
+        throw new InvalidArgumentException("Processor '$name' doesn't exists!");
     }
-    else {
-        return $config;
-    }
+    
+    return $processor($config);
 }
 
 /**
@@ -51,19 +50,13 @@ function process_file ($file) {
     });
     
     if (empty($input)) {
-        list($input, $content) = process_content($content);
-        
-        if (!is_array($input)) {
-            $input = array();
-        }
+        list($input, $content) = process_config($content);
     }
     
-    $processor = array_get(
-        $input, 'processor', 
-        config('general.processing.content')
-    );
+    $processor = array_get($input, 'processor');
+    $processor = $processor ? $processor : config('general.processing.content');
     
-    $input['content'] = $processor ? process($processor, $content) : $content;
+    $input['content'] = $processor ? process($processor, $content) : $config;
     
     return $input;
 }
@@ -75,7 +68,7 @@ function process_file ($file) {
  * @param string $content
  * @return array
  */
-function process_content ($content) {
+function process_config ($content) {
     $first  = strpos($content, '---');
     $second = strpos($content, '---', 1);
     
