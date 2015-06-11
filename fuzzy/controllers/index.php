@@ -3,7 +3,7 @@
 /**
  * Index page
  */
-function route_index_index () {
+function route_posts_index () {
     route_posts_view();
 }
 

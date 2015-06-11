@@ -79,6 +79,8 @@ function route_content ($path) {
  */
 function base_url ($root = null, $base = null) {
     $root = trim($root ? $root : $_SERVER['DOCUMENT_ROOT'], '/');
+    $root = $root === '' ? BASEPATH : $root;
+    
     $base = trim($base ? $base : BASEPATH, '/');
     
     if ($root === $base) {

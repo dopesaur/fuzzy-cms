@@ -6,7 +6,7 @@
     </h1>
     
     <p>
-        <a href="<?php echo url() ?>">Latest posts</a>
+        <a href="<?php echo url('posts') ?>">Latest posts</a>
         <?php foreach (data('pages') as $url => $title): ?>
             &ndash; 
             <a href="<?php echo url($url) ?>">
