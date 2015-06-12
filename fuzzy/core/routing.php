@@ -42,7 +42,6 @@ function route_exists ($prefix, $suffix) {
 /**
  * Route the path to content
  * 
- * @todo decompose
  * @param string $path
  * @return bool
  */
@@ -51,13 +50,7 @@ function route_content ($path) {
         not_found();
     }
     
-    $path = trim($path, '/');
-    $path = clean_url($path);
-    $path = basepath("content/$path");
-    
-    $file = content_path($path);
-    
-    if (!$file) {
+    if (!$file = content_path($path)) {
         return false;
     }
     

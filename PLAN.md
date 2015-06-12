@@ -11,9 +11,9 @@ There are some features that I would like to implement in Fuzzy (funny name, huh
 - [x] Data files (custom data you can use anywhere)
 - [x] Flexible content management
 - [x] Custom layouts
-- [ ] Build static website out of `content` and of all the extensions (next stream)
+- [x] Build static website out of `content` and of all the extensions
+- [ ] Ability to cache content into `db.sqlite` (next stream)
 - [ ] Browse content API
-- [ ] Ability to cache content into `db.sqlite` (next stream, probably)
 - [ ] phar utility for building the CMS
 
 More to come...

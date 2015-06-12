@@ -40,7 +40,7 @@ function theme ($new_theme = '') {
 /**
  * View the view
  * 
- * @todo decompose
+ * @throws \Exception
  * @param string $__view
  * @param array $__data
  */

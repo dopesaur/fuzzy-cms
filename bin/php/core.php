@@ -15,11 +15,27 @@ function clean_tags ($text) {
 /**
  * Compress php file
  * 
+ * @param string $content
+ * @return string
+ */
+function compress_file ($content) {
+    $content = remove_comments($content);
+    $spaces = '/(\n|\r\n|\s{4,}|\t)/';
+    
+    $content = preg_replace($spaces, '', $content);
+    
+    return str_replace('<?php', '<?php ', $content);
+}
+
+/**
+ * Remove all comments from PHP code
+ * 
  * @link  http://stackoverflow.com/questions/503871/ ¬
  *        best-way-to-automatically-remove-comments-from-php-code
  * @param string $content
+ * @return string
  */
-function compress_file ($content) {
+function remove_comments ($content) {
     $commentTokens = array(T_COMMENT, T_DOC_COMMENT);
 
     $tokens = token_get_all($content);
@@ -37,18 +53,13 @@ function compress_file ($content) {
         $new_content .= $token;
     }
     
-    $content = $new_content;
-    $spaces = '/(\n|\r\n|\s{4,}|\t)/';
-    
-    $content = preg_replace($spaces, '', $content);
-    $content = str_replace('<?php', '<?php ', $content);
-    
-    return $content;
+    return $new_content;
 }
 
 /**
  * Entry point, pass a config to build
  * 
+ * @todo decompose
  * @param string $json_config
  */
 function main ($json_config) {

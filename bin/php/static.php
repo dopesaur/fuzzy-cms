@@ -1,7 +1,5 @@
 <?php
 
-require 'shared.php';
-
 /**
  * Another build file, 
  * renders whole structure into static website
@@ -72,11 +70,7 @@ function capture_content ($path) {
         return route_content($path);
     });
     
-    return str_replace(
-        array('href="/', 'src="/'),
-        array('href="', 'src="'),
-        $content
-    );
+    return replace_links($content);
 }
 
 /**
@@ -90,6 +84,16 @@ function capture_route ($path) {
         return dispatch($path);
     });
     
+    return replace_links($content);
+}
+
+/**
+ * Replace absolute attribute links to relative
+ * 
+ * @param string $content
+ * @return string
+ */
+function replace_links ($content) {
     return str_replace(
         array('href="/', 'src="/'),
         array('href="', 'src="'),
@@ -122,63 +126,95 @@ function process_content ($basepath, $content) {
     $document->getElementsByTagName('head')
              ->item(0)
              ->insertBefore($base, $title);
-    $document->normalizeDocument();
     
     return $document->saveHTML();
 }
 
 /**
+ * Save content
+ * 
+ * @param string $content
+ * @param string $path
+ * @param string $destination
+ * @param string $basepath
+ */
+function save_content ($content, $path, $destination, $basepath) {
+    $filepath = $destination . $path . '/index.html';
+    
+    expand_path($path, $destination);
+    
+    file_put_contents($filepath, process_content($basepath, $content));
+}
+
+/**
+ * Save route content to file
+ * 
+ * @param string $path
+ * @param array $parameters
+ */
+function save_route ($path, $parameters, $destination, $basepath) {
+    foreach ($parameters as $parameter) {
+        if (!is_array($parameter)) {
+            $parameter = array($parameter);
+        }
+    
+        $route = path_to_route($path, $parameter);
+        
+        save_content(
+            capture_route($route),
+            $route, 
+            $destination, $basepath
+        );
+    }
+}
+
+/**
+ * Path to route
+ * 
+ * @param string $path
+ * @return string
+ */
+function path_to_route ($path, $parameter) {
+    $route = chop($path, '/');
+    $route .= '/';
+    $route .= implode('/', $parameter);
+    
+    return trim($route, '/');
+}
+
+/**
  * Entry point
  * 
+ * @todo decompose
  * @param string $destination
  * @param string $basepath
  */
 function main ($destination = 'static', $basepath = '') {
-    load_core();
-    load_extensions();
-    
-    array_set($_SERVER, 'DOCUMENT_ROOT', BASEPATH);
-    date_default_timezone_set(config('general.timezone', 'Europe/London'));
-    
-    db_connect(basepath('content/db.sqlite'));
-    
     $destination = trim($destination, '/') . '/';
     $basepath = chop("/$basepath/", '/');
     
     foreach (content_files() as $file) {
         $path = construct_path($file);
         
-        $content  = capture_content($path);
-        $filepath = $destination . $path . '/index.html';
-        
-        expand_path($path, $destination);
-        
-        file_put_contents($filepath, process_content($basepath, $content));
+        save_content(capture_content($path), $path, $destination, $basepath);
     }
     
     foreach (extension_routes() as $path => $parameters) {
-        foreach ($parameters as $parameter) {
-            if (!is_array($parameter)) {
-                $parameter = array($parameter);
-            }
-        
-            $route = chop($path, '/');
-            $route .= '/';
-            $route .= implode('/', $parameter);
-            $route = trim($route, '/');
-            
-            $content  = capture_route($route);
-            $filepath = $destination . $route . '/index.html';
-            
-            expand_path($route, $destination);
-            
-            file_put_contents($filepath, process_content($basepath, $content));
-        }
+        save_route($path, $parameters, $destination, $basepath);
     }
 }
 
 /** Run, baby */
+require 'shared.php';
 require BASEPATH . '/fuzzy/core/index.php';
+
+load_core();
+load_extensions();
+
+array_set($_SERVER, 'DOCUMENT_ROOT', BASEPATH);
+date_default_timezone_set(config('general.timezone', 'Europe/London'));
+
+db_connect(basepath('content/db.sqlite'));
 
 call_user_func_array(
     'main', 

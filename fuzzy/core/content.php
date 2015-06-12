@@ -55,6 +55,10 @@ function content_file_exists ($file) {
  * @return string
  */
 function content_path ($path) {
+    $path = trim($path, '/');
+    $path = clean_url($path);
+    $path = basepath("content/$path");
+    
     $directory = file_exists("$path/index.md");
     $file      = file_exists("$path.md");
     

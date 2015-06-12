@@ -48,27 +48,26 @@ function concat_theme ($files, $directory, $theme) {
 /**
  * Entry point
  * 
+ * @throws \Exception
  * @param string $theme
  */
 function main ($theme = 'default') {
     $basepath = dirname(dirname(__DIR__));
     
-    $themes_directory = "$basepath/themes";
+    $themes_directory      = "$basepath/themes";
     $destination_directory = "$basepath/build/themes";
     
     if (!file_exists("$themes_directory/$theme")) {
         throw new Exception("Theme '$theme' doesn't exists!");
     }
     
-    $files = glob_recursive("$themes_directory/$theme/*.php");
+    $files   = glob_recursive("$themes_directory/$theme/*.php");
     $content = concat_theme($files, $themes_directory, $theme);
     
     file_put_contents("$destination_directory/$theme.php", $content);
 }
 
-if (isset($_SERVER['argv'][1])) {
-    main($_SERVER['argv'][1]);
-}
-else {
-    main();
-}
+call_user_func_array(
+    'main', 
+    array_slice($_SERVER['argv'], 1)
+);
