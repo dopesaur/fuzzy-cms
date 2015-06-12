@@ -50,17 +50,17 @@ function format_date ($date) {
     </h1>
     
     <p>
-        <a href="<?php echo url() ?>">Latest posts</a>
-        <?php foreach (data('pages') as $url => $title): ?>
+        <a href="<?php echo url('posts') ?>">Latest posts</a>
+        <?php foreach (data('pages') as $url => $title): ?> 
             &ndash; 
             <a href="<?php echo url($url) ?>">
-                <?php echo $title ?>
+                <?php echo $title ?> 
             </a>
-        <?php endforeach; ?>
+        <?php endforeach; ?> 
         
         <?php if (is_admin()): ?> 
         &ndash; <a href="<?php echo url('admin') ?>">Admin</a>
-        <?php endif; ?>
+        <?php endif; ?> 
     </p>
 </header>
 <?php }  function theme_default_blocks_pagination (array $__data) {  extract($__data); ?><p>
