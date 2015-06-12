@@ -43,3 +43,22 @@ function route_post_view ($post_id = 0) {
         'post'  => $post,
     ));
 }
+
+extension_routes(function () {
+    $total = posts_count();
+    $pages = ceil($total / config('blog.posts', 5));
+    $posts_ids = db_select('SELECT id FROM posts');
+    
+    $ids = array_map(
+        function ($value) { 
+            return $value['id']; 
+        }, 
+        $posts_ids
+    );
+    
+    return array(
+        'posts/'     => array(array()),
+        'posts/view' => range(1, $pages),
+        'post/view'  => $ids
+    );
+});

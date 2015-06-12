@@ -80,6 +80,24 @@ function capture_content ($path) {
 }
 
 /**
+ * Capture the content of route
+ * 
+ * @param string $path
+ * @return string
+ */
+function capture_route ($path) {
+    $content = capture(function () use ($path) {
+        return dispatch($path);
+    });
+    
+    return str_replace(
+        array('href="/', 'src="/'),
+        array('href="', 'src="'),
+        $content
+    );
+}
+
+/**
  * Process the content (add <base>)
  * 
  * @param string $basepath
@@ -122,9 +140,11 @@ function main ($destination = 'static', $basepath = '') {
     array_set($_SERVER, 'DOCUMENT_ROOT', BASEPATH);
     date_default_timezone_set(config('general.timezone', 'Europe/London'));
     
+    db_connect(basepath('content/db.sqlite'));
+    
     $destination = trim($destination, '/') . '/';
     $basepath = chop("/$basepath/", '/');
-        
+    
     foreach (content_files() as $file) {
         $path = construct_path($file);
         
@@ -134,6 +154,26 @@ function main ($destination = 'static', $basepath = '') {
         expand_path($path, $destination);
         
         file_put_contents($filepath, process_content($basepath, $content));
+    }
+    
+    foreach (extension_routes() as $path => $parameters) {
+        foreach ($parameters as $parameter) {
+            if (!is_array($parameter)) {
+                $parameter = array($parameter);
+            }
+        
+            $route = chop($path, '/');
+            $route .= '/';
+            $route .= implode('/', $parameter);
+            $route = trim($route, '/');
+            
+            $content  = capture_route($route);
+            $filepath = $destination . $route . '/index.html';
+            
+            expand_path($route, $destination);
+            
+            file_put_contents($filepath, process_content($basepath, $content));
+        }
     }
 }
 
