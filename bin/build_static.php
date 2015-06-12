@@ -2,8 +2,6 @@
 
 require 'shared.php';
 
-error_reporting(0);
-
 /**
  * Another build file, 
  * renders whole structure into static website
@@ -30,17 +28,82 @@ function content_files () {
 function expand_path ($path, $destination) {
     $path  = trim($path, '/');
     $frags = explode('/', $path);
-    $temp  = '';
+    $path  = '';
     
     while (!empty($frags)) {
-        $frag = array_shift($frags);
+        $frag  = array_shift($frags);
+        $path .= "$frag/";
         
-        $temp .= $frag . '/';
+        $fullpath = "$destination/$path";
         
-        if (!file_exists("$destination/$temp")) {
-            mkdir("$destination/$temp");
+        if (!file_exists($fullpath)) {
+            mkdir($fullpath);
         }
     }
+}
+
+/**
+ * Construct URL path to content files
+ * 
+ * @param string $file
+ * @return string
+ */
+function construct_path ($file) {
+    $path = substr($file, strlen(BASEPATH) + strlen('/content/'));
+    $path = substr($path, 0, strpos($path, '.'));
+    
+    $index = strlen($path) - strlen('index');
+    
+    if (strpos($path, 'index') === $index) {
+        $path = strpos($path, 0, $index);
+    }
+    
+    return $path;
+}
+
+/**
+ * Capture content for file
+ * 
+ * @param string $path
+ * @return string
+ */
+function capture_content ($path) {
+    $content = capture(function () use ($path) {
+        return route_content($path);
+    });
+    
+    return str_replace(
+        array('href="/', 'src="/'),
+        array('href="', 'src="'),
+        $content
+    );
+}
+
+/**
+ * Process the content (add <base>)
+ * 
+ * @param string $basepath
+ * @param string $content
+ * @return 
+ */
+function process_content ($basepath, $content) {
+    $document = new DOMDocument;
+    
+    libxml_use_internal_errors(true);
+    $document->loadHTML($content);
+    
+    $document->preserveWhiteSpace = false;
+    $document->formatOutput = true;
+    
+    $base = $document->createElement('base');
+    $base->setAttribute('href', "$basepath/");
+    
+    $document->getElementsByTagName('head')
+             ->item(0)
+             ->appendChild($base);
+    $document->normalizeDocument();
+    
+    return $document->saveHTML();
 }
 
 /**
@@ -50,42 +113,31 @@ function expand_path ($path, $destination) {
  * @param string $basepath
  */
 function main ($destination, $basepath = '') {
-    require BASEPATH . '/fuzzy/core/index.php';
-    
     load_core();
     load_extensions();
     
-    $_SERVER['DOCUMENT_ROOT'] = BASEPATH;
-    
+    array_set($_SERVER, 'DOCUMENT_ROOT', BASEPATH);
     date_default_timezone_set(config('general.timezone', 'Europe/London'));
+    
+    $destination = trim($destination, '/') . '/';
+    $basepath = chop("/$basepath/", '/');
         
     foreach (content_files() as $file) {
-        $path = substr($file, strlen(BASEPATH) + strlen('/content/'));
-        $path = substr($path, 0, strpos($path, '.'));
+        $path = construct_path($file);
         
-        $index = strlen($path) - strlen('index');
-        
-        if (strpos($path, 'index') === $index) {
-            $path = strpos($path, 0, $index);
-        }
-        
-        $content = capture(function () use ($path) {
-            return route_content($path);
-        });
+        $content  = capture_content($path);
+        $filepath = $destination . $path . '/index.html';
         
         expand_path($path, $destination);
         
-        file_put_contents("$destination{$path}/index.html", $content);
+        file_put_contents($filepath, process_content($basepath, $content));
     }
 }
 
-$args = count($_SERVER['argv']);
+/** Run, baby */
+require BASEPATH . '/fuzzy/core/index.php';
 
-if ($args <= 1) {
-    main(BASEPATH . '/static/');
-}
-else if ($args > 2) {
-    list($file, $destination, $basepath) = $_SERVER['argv'];
-    
-    main($destination, $basepath);
-}
+call_user_func_array(
+    'main', 
+    array_slice($_SERVER['argv'], 1)
+);

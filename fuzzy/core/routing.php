@@ -51,6 +51,7 @@ function route_content ($path) {
         not_found();
     }
     
+    $path = trim($path, '/');
     $path = clean_url($path);
     $path = basepath("content/$path");
     
@@ -78,16 +79,16 @@ function route_content ($path) {
  * @return string
  */
 function base_url ($root = null, $base = null) {
-    $root = trim($root ? $root : $_SERVER['DOCUMENT_ROOT'], '/');
-    $root = $root === '' ? BASEPATH : $root;
+    $root = $root ? $root : $_SERVER['DOCUMENT_ROOT'];
     
+    $root = trim($root ? $root : BASEPATH, '/');
     $base = trim($base ? $base : BASEPATH, '/');
     
     if ($root === $base) {
         return '';
     }
     
-    $base_url = substr($base, strlen($root));
+    $base_url = str_replace($root, '', $base);
     
     return trim($base_url, '/');
 }
