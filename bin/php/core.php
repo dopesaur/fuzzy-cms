@@ -52,7 +52,7 @@ function compress_file ($content) {
  * @param string $json_config
  */
 function main ($json_config) {
-    $basepath = dirname(__DIR__) . '/';
+    $basepath = dirname(dirname(__DIR__)) . '/';
     
     $build_config = file_get_contents($json_config);
     $build_config = json_decode($build_config, true);

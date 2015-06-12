@@ -9,7 +9,7 @@ require 'shared.php';
  * @package Fuzzy
  */
 
-define('BASEPATH', dirname(__DIR__));
+define('BASEPATH', dirname(dirname(__DIR__)));
 
 /**
  * Get all content files
@@ -98,9 +98,12 @@ function process_content ($basepath, $content) {
     $base = $document->createElement('base');
     $base->setAttribute('href', "$basepath/");
     
+    $title = $document->getElementsByTagName('title')
+                      ->item(0);
+    
     $document->getElementsByTagName('head')
              ->item(0)
-             ->appendChild($base);
+             ->insertBefore($base, $title);
     $document->normalizeDocument();
     
     return $document->saveHTML();
@@ -112,7 +115,7 @@ function process_content ($basepath, $content) {
  * @param string $destination
  * @param string $basepath
  */
-function main ($destination, $basepath = '') {
+function main ($destination = 'static', $basepath = '') {
     load_core();
     load_extensions();
     

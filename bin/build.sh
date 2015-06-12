@@ -1,5 +1,5 @@
 #!/bin/bash
 
-php bin/build_core.php
-php bin/build_theme.php "default"
-php bin/build_theme.php "admin"
+php bin/php/core.php
+php bin/php/theme.php "default"
+php bin/php/theme.php "admin"

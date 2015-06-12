@@ -51,7 +51,7 @@ function concat_theme ($files, $directory, $theme) {
  * @param string $theme
  */
 function main ($theme = 'default') {
-    $basepath = dirname(__DIR__);
+    $basepath = dirname(dirname(__DIR__));
     
     $themes_directory = "$basepath/themes";
     $destination_directory = "$basepath/build/themes";
