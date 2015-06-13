@@ -7,7 +7,7 @@
  */
 
 /**
- * Browse content
+ * Browse content, the function is non recursive
  * 
  * @param string $path
  * @return array
@@ -18,7 +18,8 @@ function browse_content ($path = '') {
     $files = glob("$path/*");
     
     return array_filter($files, function ($file) {
-        return strpos($file, '.') !== 0 || !is_dir($file);
+        return strpos($file, '.') 
+            || !is_dir($file);
     });
 }
 
@@ -29,9 +30,7 @@ function browse_content ($path = '') {
  * @return bool
  */
 function is_content_file ($file) {
-    $path = basepath('content');
-    
-    return strpos($file, $path) === 0;
+    return strpos($file, basepath('content')) === 0;
 }
 
 /**
@@ -43,9 +42,7 @@ function is_content_file ($file) {
  * @return bool
  */
 function content_file_exists ($file) {
-    $path = basepath("content/$file");
-    
-    return file_exists($path);
+    return file_exists(basepath("content/$file"));
 }
 
 /**

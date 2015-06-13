@@ -11,6 +11,13 @@ one tiny CMS in a file (in few files, actually, see the disclaimer) with ability
 
 What do you think of that?
 
+## Features
+
+Fuzzy has following features:
+
+* Simple (procedural/functional) code
+* 
+
 ## Benefits of using this CMS
 
 There are some benefits of using this CMS:

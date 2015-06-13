@@ -24,8 +24,10 @@ function is_admin ($authorized = null) {
  * @return bool
  */
 function auth_user ($username, $password) {
+    $user = config('users.admin');
+    
     return is_admin(
-        $username === config('users.username') && 
-        $password === config('users.password')
+        $username === $user['username'] && 
+        $password === $user['password']
     );
 }

@@ -21,13 +21,13 @@ function posts_all_paginated ($limit, $page = 1) {
     
     $pagination = pagination($total, $limit, $page);
     
-    // Maybe I should use extract?
-    $limit = $pagination['limit'];
-    $offset = $pagination['offset'];
-    
-    $posts = db_select(
-        'SELECT id, date, title, description FROM posts ORDER BY id DESC LIMIT ? OFFSET ?',
-        array($limit, $offset)
+    $posts = db_select('
+        SELECT id, date, title, description 
+        FROM posts 
+        ORDER BY id DESC 
+        LIMIT ? 
+        OFFSET ?',
+        array($pagination['limit'], $pagination['offset'])
     );
     
     return compact('posts', 'pagination');
@@ -51,8 +51,10 @@ function posts_count () {
  * @return array
  */
 function post_by_id ($id) {
-    return db_select(
-        'SELECT id, date, title, content, description FROM posts WHERE id = ?', 
+    return db_select('
+        SELECT id, date, title, content, description 
+        FROM posts 
+        WHERE id = ?', 
         array($id), true
     );
 }

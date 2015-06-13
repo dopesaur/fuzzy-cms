@@ -85,10 +85,9 @@ function route_admin_posts_edit ($id = 0) {
     }
     
     layout('posts/modify', array(
+        'form'   => $form,
         'title'  => 'View posts',
-        'action' => 'edit',
-        
-        'form' => $form
+        'action' => 'edit'
     ));
 }
 

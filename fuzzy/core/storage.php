@@ -48,7 +48,7 @@ function lazy_storage ($path, array $array = array()) {
     return function ($key, $default = false) use (&$array, $path) {
         $dot = strpos($key, '.');
         
-        $first = $dot !== false ? substr($key, 0, $dot) : $key;
+        $first = $dot ? substr($key, 0, $dot) : $key;
         
         if (!isset($array[$first])) {
             $config = "$path/$first.php";

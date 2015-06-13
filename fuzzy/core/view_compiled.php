@@ -31,7 +31,11 @@ function theme ($new_theme = '') {
     if ($new_theme) {
         $theme = $new_theme;
         
-        require_once sprintf('%s/themes/%s.php', BASEPATH, $theme);
+        $path = basepath("themes/$theme.php");
+        
+        if (file_exists($path)) {
+            require_once $path;
+        }
     }
     
     return $theme;
