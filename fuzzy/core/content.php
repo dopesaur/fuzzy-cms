@@ -18,8 +18,7 @@ function browse_content ($path = '') {
     $files = glob("$path/*");
     
     return array_filter($files, function ($file) {
-        return strpos($file, '.') 
-            || !is_dir($file);
+        return strpos($file, '.') || !is_dir($file);
     });
 }
 

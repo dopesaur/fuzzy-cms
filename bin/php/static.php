@@ -7,7 +7,9 @@
  * @package Fuzzy
  */
 
-define('BASEPATH', dirname(dirname(__DIR__)));
+if (!defined('BASEPATH')) {
+    define('BASEPATH', dirname(dirname(__DIR__)));
+}
 
 /**
  * Get all content files
@@ -190,7 +192,7 @@ function path_to_route ($path, $parameter) {
  * @param string $basepath
  */
 function main ($destination = 'static', $basepath = '') {
-    $destination = trim($destination, '/') . '/';
+    $destination = chop(BASEPATH . "/$destination", '/') . '/';
     $basepath = chop("/$basepath/", '/');
     
     foreach (content_files() as $file) {

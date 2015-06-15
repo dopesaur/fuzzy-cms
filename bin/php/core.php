@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('BASEPATH')) {
+    define('BASEPATH', dirname(dirname(__DIR__)));
+}
+
 /**
  * Remove PHP tags
  * 
@@ -63,10 +67,16 @@ function remove_comments ($content) {
  * @param string $json_config
  */
 function main ($json_config) {
-    $basepath = dirname(dirname(__DIR__)) . '/';
+    $basepath = BASEPATH . '/';
     
     $build_config = file_get_contents($json_config);
     $build_config = json_decode($build_config, true);
+    
+    if (!$build_config) {
+        throw new Exception(
+            'Build config is not valid JSON or does not exists!!!'
+        );
+    }
     
     $files = $build_config['files'];
     

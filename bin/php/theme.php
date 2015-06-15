@@ -2,6 +2,10 @@
 
 require 'shared.php';
 
+if (!defined('BASEPATH')) {
+    define('BASEPATH', dirname(dirname(__DIR__)));
+}
+
 /**
  * Wrap theme view into function
  * 
@@ -52,7 +56,7 @@ function concat_theme ($files, $directory, $theme) {
  * @param string $theme
  */
 function main ($theme = 'default') {
-    $basepath = dirname(dirname(__DIR__));
+    $basepath = BASEPATH;
     
     $themes_directory      = "$basepath/themes";
     $destination_directory = "$basepath/build/themes";
