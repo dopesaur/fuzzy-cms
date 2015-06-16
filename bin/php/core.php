@@ -6,6 +6,8 @@
  * @arg string $json_config Path to JSON config
  */
 
+require 'shared.php';
+
 if (!defined('BASEPATH')) {
     define('BASEPATH', dirname(dirname(__DIR__)));
 }
@@ -100,6 +102,8 @@ function main ($json_config = null, $path = '') {
     if ($build_config['compress'] === true) {
         $content = compress_file($content);
     }
+    
+    expand_path(dirname($build_config['destination']), $basepath);
     
     file_put_contents($basepath . $build_config['destination'], $content);
 }

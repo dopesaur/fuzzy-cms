@@ -76,6 +76,8 @@ function main ($theme = 'default') {
     $files   = glob_recursive("$themes_directory/$theme/*.php");
     $content = concat_theme($files, $themes_directory, $theme);
     
+    expand_path('build/themes', $basepath);
+    
     file_put_contents("$destination_directory/$theme.php", $content);
 }
 

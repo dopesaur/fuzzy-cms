@@ -15,3 +15,5 @@ chmod a+x bin/build.sh
 ```
 
 After that, compiled files should appear in the `build` directory. 
+
+## PHAR builder

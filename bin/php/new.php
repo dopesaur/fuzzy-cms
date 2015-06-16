@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Creates new Fuzzy website
+ * 
+ * @arg string $directory
+ */
+
 require 'shared.php';
 
 if (!defined('BASEPATH')) {
@@ -11,14 +17,20 @@ if (!defined('BASEPATH')) {
  * 
  * @param string $directory
  */
-function main () {
-    $path  = BASEPATH;
+function main ($directory = '') {
+    $path = BASEPATH . "/$directory/";
+    $path = chop($path, '/');
+    
     $fuzzy = __DIR__ . '/fuzzy';
     
-    if (count(array_diff(scandir($path), array('..', '.'))) > 0) {
+    if (!file_exists($path)) {
+        mkdir($path);
+    }
+    
+    if (count(array_diff(scandir($path), array('..', '.', 'fuzzy.phar'))) > 0) {
         die(
             "The directory isn't empty!\n" .
-            "Please cleaup the directory before using installing Fuzzy.\n"
+            "Please cleaup the directory before creating new Fuzzy.\n"
         );
     }
     
