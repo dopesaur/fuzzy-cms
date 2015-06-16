@@ -5,6 +5,8 @@
  * renders whole structure into static website
  * 
  * @package Fuzzy
+ * @arg string $destination - Destination folder relative to basepath
+ * @arg string $basepath - Set basepath for non-document root sites
  */
 
 if (!defined('BASEPATH')) {
@@ -18,28 +20,6 @@ if (!defined('BASEPATH')) {
  */
 function content_files () {
     return glob_recursive(BASEPATH . '/content/*.md');
-}
-
-/**
- * Expand the path
- * 
- * @param string $path
- */
-function expand_path ($path, $destination) {
-    $path  = trim($path, '/');
-    $frags = explode('/', $path);
-    $path  = '';
-    
-    while (!empty($frags)) {
-        $frag  = array_shift($frags);
-        $path .= "$frag/";
-        
-        $fullpath = "$destination/$path";
-        
-        if (!file_exists($fullpath)) {
-            mkdir($fullpath);
-        }
-    }
 }
 
 /**
@@ -164,8 +144,7 @@ function save_route ($path, $parameters, $destination, $basepath) {
         
         save_content(
             capture_route($route),
-            $route, 
-            $destination, $basepath
+            $route, $destination, $basepath
         );
     }
 }
@@ -213,8 +192,10 @@ require BASEPATH . '/fuzzy/core/index.php';
 load_core();
 load_extensions();
 
+$timezone = config('general.timezone', 'Europe/London');
+
 array_set($_SERVER, 'DOCUMENT_ROOT', BASEPATH);
-date_default_timezone_set(config('general.timezone', 'Europe/London'));
+date_default_timezone_set($timezone);
 
 db_connect(basepath('content/db.sqlite'));
 

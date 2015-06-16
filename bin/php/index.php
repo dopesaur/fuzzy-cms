@@ -13,6 +13,9 @@ $args = array_slice($_SERVER['argv'], 1);
 $file = current($args);
 $path = __DIR__ . "/$file.php";
 
+/**
+ * @const string BASEPATH Current working directory
+ */
 define('BASEPATH', getcwd());
 
 if (file_exists($path) && $file !== 'shared') {

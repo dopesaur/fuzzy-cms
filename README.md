@@ -15,8 +15,12 @@ What do you think of that?
 
 Fuzzy has following features:
 
-* Simple (procedural/functional) code
-* 
+* Very simple (procedural/functional) code
+* Can be compressed to one file with extensions and themes (core size is 10-20kb)
+* Has a Phar builder
+* CMS can be converted to static website
+* Support of different text processors and API for adding processors (Markdown, etc.)
+* Extension API
 
 ## Benefits of using this CMS
 

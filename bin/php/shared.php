@@ -19,3 +19,25 @@ function glob_recursive ($pattern, $flags = 0) {
     
     return $files;
 }
+
+/**
+ * Expand the path
+ * 
+ * @param string $path
+ */
+function expand_path ($path, $destination) {
+    $path  = trim($path, '/');
+    $frags = explode('/', $path);
+    $path  = '';
+    
+    while (!empty($frags)) {
+        $frag  = array_shift($frags);
+        $path .= "$frag/";
+        
+        $fullpath = "$destination/$path";
+        
+        if (!file_exists($fullpath)) {
+            mkdir($fullpath);
+        }
+    }
+}

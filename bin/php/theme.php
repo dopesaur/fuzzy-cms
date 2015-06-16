@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Theme builder, concatenates all theme files (PHP templates)
+ * into one file in `build/themes/`
+ * 
+ * @package Fuzzy
+ * @arg string $theme - Theme which you want to concatenate
+ */
+
 require 'shared.php';
 
 if (!defined('BASEPATH')) {

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Core builder
+ * 
+ * @arg string $json_config Path to JSON config
+ */
+
 if (!defined('BASEPATH')) {
     define('BASEPATH', dirname(dirname(__DIR__)));
 }
@@ -64,10 +70,13 @@ function remove_comments ($content) {
  * Entry point, pass a config to build
  * 
  * @todo decompose
+ * @throws \Exception
  * @param string $json_config
+ * @param string $path
  */
-function main ($json_config) {
-    $basepath = BASEPATH . '/';
+function main ($json_config = null, $path = '') {
+    $json_config = $json_config ? $json_config : __DIR__ . '/build_core.json';
+    $basepath = ($path ? $path : BASEPATH) . '/';
     
     $build_config = file_get_contents($json_config);
     $build_config = json_decode($build_config, true);
@@ -84,9 +93,8 @@ function main ($json_config) {
     
     foreach ($files as $file) {
         $file_content = file_get_contents($basepath . $file);
-        $file_content = clean_tags($file_content);
         
-        $content .= $file_content;
+        $content .= clean_tags($file_content);
     }
     
     if ($build_config['compress'] === true) {
@@ -96,5 +104,7 @@ function main ($json_config) {
     file_put_contents($basepath . $build_config['destination'], $content);
 }
 
-/** Build core */
-main(__DIR__ . '/build_core.json');
+call_user_func_array(
+    'main', 
+    array_slice($_SERVER['argv'], 1)
+);
