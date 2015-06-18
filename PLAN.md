@@ -12,9 +12,9 @@ There are some features that I would like to implement in Fuzzy (funny name, huh
 - [x] Flexible content management
 - [x] Custom layouts
 - [x] Build static website out of `content` and of all the extensions
+- [x] PHAR utility for building the CMS
 - [ ] Ability to cache content into `db.sqlite` (next stream)
 - [ ] Browse content API
-- [ ] phar utility for building the CMS
 
 More to come...
 
