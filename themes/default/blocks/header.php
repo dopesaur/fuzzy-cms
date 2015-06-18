@@ -1,7 +1,7 @@
 <header class="wrapper" id="header">
     <h1>
         <a href="<?php echo url() ?>">
-            Default
+            <?php echo config('general.title', 'Default') ?>
         </a>
     </h1>
     

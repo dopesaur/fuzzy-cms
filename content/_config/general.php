@@ -1,6 +1,9 @@
 <?php
 
 return array(
+    /* Website title */
+    'title' => 'Default',
+    
     /* Default theme */
     'theme' => 'default',
     

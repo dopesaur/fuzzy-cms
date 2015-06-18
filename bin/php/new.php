@@ -45,6 +45,7 @@ function main ($directory = '') {
     }
     
     copy("$fuzzy/index.php", "$path/index.php");
+    copy("$fuzzy/.htaccess", "$path/.htaccess");
 }
 
 call_user_func_array(

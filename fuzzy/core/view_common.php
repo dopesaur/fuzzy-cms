@@ -40,7 +40,7 @@ function not_found () {
  * @param string $path
  */
 function redirect ($path) {
-    $path = trim($path, '/');
+    $path = trim(url($path), '/');
     
     header("Location: /$path") and exit;
 }

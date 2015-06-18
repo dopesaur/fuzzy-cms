@@ -51,6 +51,7 @@ function create_phar ($phar, $basepath, $path) {
     }
     
     $phar->addFile("$basepath/index.php", "fuzzy/index.php");
+    $phar->addFile("$basepath/.htaccess", "fuzzy/.htaccess");
     $phar->stopBuffering();
 }
 
