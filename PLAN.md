@@ -1,10 +1,6 @@
-# Plan for next streams
-
-_We_ need to finish this CMS at some point, so there's a list of features that I would like to see in Fuzzy. 
-
 ## Planned features
 
-There are some features that I would like to implement in Fuzzy (funny name, huh?):
+There are some features that I would like to implement in Fuzzy:
 
 - [x] Extension API (extending and stuff)
 - [x] API for integrating different text/config formatters (markdown, textile, etc.)
@@ -13,13 +9,13 @@ There are some features that I would like to implement in Fuzzy (funny name, huh
 - [x] Custom layouts
 - [x] Build static website out of `content` and of all the extensions
 - [x] PHAR utility for building the CMS
-- [ ] Ability to cache content into `db.sqlite` (next stream)
-- [ ] Browse content API
+- [ ] Ability to cache content into `db.sqlite`
+- [x] Browse content API
 
-More to come...
+You can suggest your own features in the issues, read the next section.
 
-## Feature request?
+## Features request?
 
-During streams you can request features (if you would like, of course). It would be also helpful if you would document them [requested features] and post them in GitHub issues (with flag "feature request" in square brackets). 
+You can request features (if you would like, of course). It would be also helpful if you would document them [requested features] and post them in GitHub issues. 
 
 If I will consider your feature useful or interesting, I might add it to the list, or, less possible, implement it as separate extension (see 'Extension API' feature).
