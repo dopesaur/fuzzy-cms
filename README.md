@@ -2,7 +2,7 @@
 
 PHP procedural/functional CMS that can be compressed down to one file or static HTML website.
 
-## "So wut the point?"
+## Purpose
 
 The purpose of this CMS is to play well with FTP and git and be efficient.
 
