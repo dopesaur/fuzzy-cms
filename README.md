@@ -1,15 +1,13 @@
 # Fuzzy CMS
 
-One file CMS written in PHP (not really, see the disclaimer).
+PHP procedural/functional CMS that can be compressed down to one file or static HTML website.
 
 ## "So wut the point?"
 
-The point is... wait for it... play well with FTP and git, and be efficient, pretty much that.
+The purpose of this CMS is to play well with FTP and git and be efficient.
 
-I know there's deployment systems (based on git), and other cool stuff for cool guys, and bla bla bla, **but** 
-one tiny CMS in a file (in few files, actually, see the disclaimer) with ability to version **everything** is quite cool.
-
-What do you think of that?
+I know there's deployment systems (based on git), and other cool stuff for cool guys, **but** 
+one tiny CMS in a file (in few files, actually, see the disclaimer) with ability to version **everything** is quite cool. Just grab one compressed index.php and create anything you want.
 
 ## Features
 
@@ -18,31 +16,20 @@ Fuzzy has following features:
 * Very simple (procedural/functional) code
 * Can be compressed to one file with extensions and themes (core size is 10-20kb)
 * Has a Phar builder
-* CMS can be converted to static website
+* CMS can be converted to static website (plain .html files)
 * Support of different text processors and API for adding processors (Markdown, etc.)
 * Extension API
 
-## Benefits of using this CMS
+## Pros of using this CMS
 
-There are some benefits of using this CMS:
-
-1. ~~No one will try to modify or steal CMS from you~~
-2. ~~Sometimes it's tiny, simple, and fast~~
-
-![Reasons to date me](http://cdn.themetapicture.com/pic/images/2014/09/02/funny-reasons-date-Zach-Galifianakis.jpg)
-
-Not really :smile:
-
-There are some **real** benefits of using this CMS: 
+Following points are the pros of using this CMS:
 
 1. It's fast, 'cuz there's no real database
 2. It's simple, no complicated settings or so, just grab copy and set `777` permission to content folder, and that's it!
 3. It's tiny, few files and that's it!
-4. Less chances of somebody being dig into your code (haha compressed file, phhh)
+4. Less chances of somebody being dig into your code (haha compressed file)
 
-That's everything I can think of.
-
-## "I wanna build it myself!"
+## Build CMS
 
 Go into console to the repository directory and run: 
 
@@ -56,7 +43,7 @@ chmod a+x bin/build.sh
 
 To build everything (core and two themes).
 
-## "No, thanks, I'll take two compressed ones."
+## Compressed bundled files
 
 There are also already built files which are located in `build` directory.
 
@@ -68,13 +55,7 @@ To install this CMS, you need to copy those files (`index.php` and folder `theme
 
 Then you need to copy `content` and `assets` directories to your new website.
 
-# Disclaimer 
-
-This CMS is not actually one file. Its core and themes can be compressed down to one file, but it never would be one file because of `assets` and `content` (How would you put SQLite database in *one file with CMS*?! I'm crazy, but not that way crazy).
-
 # License
-
-License is, of course, a good ol' MIT license (the one that allows to do everything, but I'm not legible for any damage, and you're responsible for everything):
 
 ```
 The MIT License (MIT)
@@ -99,5 +80,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ```
-
-P.S.: Don't ask me about -octo- part in the repository name, I used github's inspiration as a name.
